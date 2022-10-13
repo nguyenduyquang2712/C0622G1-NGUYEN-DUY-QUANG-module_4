@@ -25,6 +25,7 @@ public class DictionaryController {
     public String showResult(@RequestParam String word, Model model) {
         String mean = iDictionaryService.findWord(word);
         model.addAttribute("mean", mean);
+        model.addAttribute("word", word);
         return "/search";
     }
 }
