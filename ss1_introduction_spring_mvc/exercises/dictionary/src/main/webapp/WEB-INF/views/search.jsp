@@ -12,11 +12,10 @@
 </head>
 <body>
 <h1> Dictionary App</h1>
-<form action="/dictionary" method="post">
+<form action="/dictionary/search" >
     <input type="text" name="word" value="${word}" placeholder="...search word">
     <input type="submit" value="Search">
 </form>
-<p>Word : ${word}</p>
 <p>Mean : ${mean}</p>
 </body>
 </html>

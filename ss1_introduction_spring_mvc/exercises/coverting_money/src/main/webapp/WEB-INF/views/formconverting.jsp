@@ -12,7 +12,7 @@
 </head>
 <body>
 <h2>Converting Money</h2>
-<form action="/" method="post">
+<form action="/result">
     <input type="number" name="usd" value="${usd}"> USD <br> <br>
     <input type="submit" value="Convert">
     <p>USD: ${usd}</p>

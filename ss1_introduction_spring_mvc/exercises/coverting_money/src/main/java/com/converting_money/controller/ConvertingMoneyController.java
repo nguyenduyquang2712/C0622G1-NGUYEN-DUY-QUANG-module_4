@@ -17,7 +17,7 @@ public class ConvertingMoneyController {
     public String showConvertingForm(){
         return "/formconverting";
     }
-    @PostMapping("/")
+    @GetMapping("/result")
     public String showResult(@RequestParam double usd, Model model) {
         if (usd >0) {
             double vnd = iConverting.convert(usd);
