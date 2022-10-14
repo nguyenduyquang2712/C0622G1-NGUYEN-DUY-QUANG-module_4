@@ -6,8 +6,8 @@
 <body>
 <form action="result" method="get" >
     <h2>Simple Computer</h2>
-    <input type="number" name="a" value="${a}" placeholder="input number">
-    <input type="number" name="b" value="${b}" placeholder="input number"> <br><br>
+    <input type="number" name="a"  placeholder="...input number" required>
+    <input type="number" name="b"  placeholder="...input number" required> <br><br>
     <button type="submit" value="add" name="submit">Addation(+)</button>
     <button type="submit" value="sub" name="submit">Subtraction(-)</button>
     <button type="submit" value="multiple" name="submit">Multiplication(*)</button>

@@ -13,12 +13,12 @@ public class CalculatorService implements ICalculatorService {
                 return a + b;
             case "sub":
                 return a - b;
-            case"multiple":
+            case "multiple":
                 return a * b;
-            case"division":
-                if(b!=0){
-                return a / b;}
-                else {
+            case "division":
+                if (b != 0) {
+                    return a / b;
+                } else {
                     throw new RuntimeException("Can't divide by zero");
                 }
         }
