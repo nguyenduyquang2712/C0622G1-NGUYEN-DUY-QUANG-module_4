@@ -21,10 +21,10 @@
     <input type="checkbox" name="condiment" value="Sprouts">Sprouts <br><br>
     <input type="submit" value="Save">
 </form>
-    <b>Condiment:</b>
-    <c:forEach items="${condiment}" var="condiment">
-        <p>${condiment}</p>
-    </c:forEach>
+<b>Condiment:</b>
+<c:forEach items="${condiment}" var="condiment">
+    <p>${condiment}</p>
+</c:forEach>
 
 </body>
 </html>
