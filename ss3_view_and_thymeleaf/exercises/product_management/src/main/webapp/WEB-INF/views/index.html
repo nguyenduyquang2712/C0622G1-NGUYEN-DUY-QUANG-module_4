@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+<h3>Products</h3>
+<p>
+    <a th:href="@{/product/create}">Create new product</a>
+</p>
+<!--/*@thymesVar id="success" type=""*/-->
+<p th:if="${success}" th:text="${success}"></p>
+<form style="width: 30%" th:action="@{/product/search}">
+    <input type="text" name="searchName" placeholder="...search name">
+    <input type="submit" value="search">
+</form>
+</form>
+<table id="products">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.description}"></td>
+        <td><a th:href="@{/product/{id}/edit(id=${product.id})}">edit</a></td>
+        <td><a th:href="@{/product/{id}/delete(id=${product.id})}">delete</a></td>
+        <td><a th:href="@{/product/{id}/view(id=${product.id})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
