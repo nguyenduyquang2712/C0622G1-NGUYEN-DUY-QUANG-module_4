@@ -3,57 +3,54 @@ package com.codegym.repository.impl;
 import com.codegym.model.Product;
 import com.codegym.repository.IProductRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Map;
 
+
+@Transactional
 @Repository
 public class ProductRepository implements IProductRepository {
-    private static Map<Integer, Product> products = new HashMap<>();
-
-    static {
-        products.put(1, new Product(1, "Iphone14", 2000, "Bán chạy"));
-        products.put(2, new Product(2, "laptop Dell", 20000, "Hết hàng"));
-        products.put(3, new Product(3, "Iphone12", 15500, "Thảm họa"));
-        products.put(4, new Product(4, "Iphone 13", 12000, "Bán chạy"));
-        products.put(6, new Product(6, "Laptop Asus", 10000, "Thảm họa"));
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<Product> findAll() {
-        return new ArrayList<>(products.values());
+        TypedQuery<Product> query = entityManager
+                .createQuery("select p from Product as p", Product.class);
+        return query.getResultList();
     }
 
     @Override
     public void save(Product product) {
-        products.put(product.getId(), product);
+        entityManager.persist(product);
     }
 
     @Override
     public Product findById(int id) {
-        return products.get(id);
+        return entityManager.find(Product.class, id);
     }
 
     @Override
-    public void remove(int id) {
-        products.remove(id);
+    public void remove(Product product) {
+        product = entityManager.merge(product);
+        entityManager.remove(product);
     }
 
     @Override
-    public void update(int id, Product product) {
-        products.put(id, product);
+    public void update(Product product) {
+        entityManager.merge(product);
     }
 
     @Override
     public List<Product> findBySearchName(String searchName) {
-        List<Product> products = new ArrayList<>();
-        for (Product product : findAll()) {
-            if (product.getName().equals(searchName)) {
-                products.add(product);
-            }
-        }
-        return products;
+        String sql = "select p from Product as p where p.name like :searchName";
+        TypedQuery<Product> query = entityManager.createQuery(sql, Product.class).setParameter("searchName", "%" + searchName + "%");
+        return query.getResultList();
     }
+
+
 }
