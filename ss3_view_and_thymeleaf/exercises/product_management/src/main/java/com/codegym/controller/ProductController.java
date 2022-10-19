@@ -18,14 +18,15 @@ public class ProductController {
 
     @GetMapping("")
     public String showList(Model model) {
-        model.addAttribute("products", iProductService.findAll());
-        return "/index";
+        List<Product> productList = iProductService.findAll();
+        model.addAttribute("products", productList);
+        return "product/index";
     }
 
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("product", new Product());
-        return "/create";
+        return "product/create";
     }
 
     @PostMapping("/save")
@@ -38,7 +39,7 @@ public class ProductController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("product", iProductService.findById(id));
-        return "/edit";
+        return "product/edit";
     }
 
     @PostMapping("/edit")
@@ -51,7 +52,7 @@ public class ProductController {
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable int id, Model model) {
         model.addAttribute("product", iProductService.findById(id));
-        return "/delete";
+        return "product/delete";
     }
 
     @PostMapping("/delete")
@@ -64,13 +65,13 @@ public class ProductController {
     @GetMapping("/{id}/view")
     public String view(@PathVariable int id, Model model) {
         model.addAttribute("product", iProductService.findById(id));
-        return "/view";
+        return "product/view";
     }
 
     @GetMapping("/search")
     public String search(@RequestParam String searchName, Model model) {
         List<Product> productList = iProductService.findBySearchName(searchName);
         model.addAttribute("products", productList);
-        return "/index";
+        return "product/index";
     }
 }
