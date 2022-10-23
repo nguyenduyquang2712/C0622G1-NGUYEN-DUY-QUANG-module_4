@@ -45,7 +45,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @GetMapping("/update-category/{id}")
+    @GetMapping("/edit-category/{id}")
     public ModelAndView showUpdateForm(@PathVariable int id) {
         Category category = categoryService.findById(id);
 
@@ -57,7 +57,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @PostMapping("/update-category")
+    @PostMapping("/edit-category")
     public ModelAndView updateCategory(@ModelAttribute("category") Category category) {
         categoryService.save(category);
 
@@ -87,15 +87,4 @@ public class CategoryController {
         return "redirect:categorys";
     }
 
-    @GetMapping("/view-category/{id}")
-    public ModelAndView detailInformationCategory(@PathVariable int id) {
-        Category category = categoryService.findById(id);
-
-        if (category == null) {
-            return new ModelAndView("/error.404");
-        }
-        ModelAndView modelAndView = new ModelAndView("/category/view");
-        modelAndView.addObject("category", category);
-        return modelAndView;
-    }
 }
