@@ -15,5 +15,5 @@ import java.util.List;
 @Repository
 public interface BlogerRepository extends JpaRepository<Bloger, Integer> {
 
-    Page<Bloger> findAllByNameContainingOrderByDateAsc(String blogName, Pageable pageable);
+    Page<Bloger> findAllByNameContainingOrderByDateDesc(String blogName, Pageable pageable);
 }
