@@ -48,7 +48,7 @@ public class BlogerController {
     }
 
     @GetMapping("")
-    public ModelAndView showBlogList(@PageableDefault(value = 1) Pageable pageable) {
+    public ModelAndView showBlogList(@PageableDefault(value = 3) Pageable pageable) {
         Page<Bloger> blogers = blogerService.findAll(pageable);
         List<Category> categories = categoryService.findAll();
         ModelAndView modelAndView = new ModelAndView("blog/index");
@@ -120,8 +120,8 @@ public class BlogerController {
     }
 
     @GetMapping("/search")
-    public ModelAndView search(@RequestParam String nameSearch, @PageableDefault(value = 1) Pageable pageable) {
-        Page<Bloger> blogers = blogerService.findAllByNameContainingOrderByDateAsc(nameSearch,pageable);
+    public ModelAndView search(@RequestParam String nameSearch, @PageableDefault(value = 3) Pageable pageable) {
+        Page<Bloger> blogers = blogerService.findAllByNameContainingOrderByDateDesc(nameSearch,pageable);
         List<Category> categories = categoryService.findAll();
         ModelAndView modelAndView = new ModelAndView("blog/index");
         modelAndView.addObject("nameSearch",nameSearch);
