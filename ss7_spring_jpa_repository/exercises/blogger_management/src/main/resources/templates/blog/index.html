@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Show blog list</title>
+<head th:replace="/layout :: head">
 </head>
 <body>
 <h1>Blog list</h1>
@@ -13,17 +11,17 @@
     <input type="text" name="nameSearch" placeholder="Input name">
     <input type="submit" value="Search">
 </form>
-<table border="1">
+<table class="table table-dark"  border="1">
     <thead>
     <tr>
-        <td>Name</td>
-        <td>Content</td>
-        <td>Author</td>
-        <td>Category</td>
-        <td>DateCreate</td>
-        <td>Edit</td>
-        <td>Delete</td>
-        <td>View</td>
+        <th>Name</th>
+        <th>Content</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>DateCreate</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
     </tr>
     </thead>
     <tbody>
@@ -34,9 +32,9 @@
             <td th:text="${blog.author}"></td>
             <td th:text="${blog.category.name}"></td>
             <td th:text="${blog.date}"></td>
-            <td><a th:href="@{/blogers/edit-blog/__${blog.id}__}">edit</a></td>
-            <td><a th:href="@{/blogers/delete-blog/__${blog.id}__}">delete</a></td>
-            <td><a th:href="@{/blogers/view-blog/__${blog.id}__}">view</a></td>
+            <td><a class="btn btn-danger" th:href="@{/blogers/edit-blog/__${blog.id}__}">edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{/blogers/delete-blog/__${blog.id}__}">delete</a></td>
+            <td><a class="btn btn-danger" th:href="@{/blogers/view-blog/__${blog.id}__}">view</a></td>
         </tr>
     </th:block>
     </tbody>
@@ -51,5 +49,6 @@
        th:if="${blogs.hasNext()}">Next</a>
 
 </div>
+<footer th:replace="layout :: footer"></footer>
 </body>
 </html>
