@@ -17,7 +17,7 @@ public interface IBlogerService {
 
     void remove(Bloger bloger);
 
-    List<Bloger> findByName(String nameSearch);
+    Page<Bloger> findAllByNameContainingOrderByDateAsc(String blogName, Pageable pageable);
 
     Page<Bloger> findAll(Pageable pageable);
 

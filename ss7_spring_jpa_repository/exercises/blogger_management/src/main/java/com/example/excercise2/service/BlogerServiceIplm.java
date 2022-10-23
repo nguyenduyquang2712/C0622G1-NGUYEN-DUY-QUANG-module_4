@@ -17,7 +17,7 @@ import java.util.List;
 public class BlogerServiceIplm implements IBlogerService {
 
     @Autowired
-    private BlogerRepository blogerRepository;
+    private BlogerRepository blogerRepository ;
 
     @Override
     public List<Bloger> findAll() {
@@ -40,9 +40,10 @@ public class BlogerServiceIplm implements IBlogerService {
     }
 
     @Override
-    public List<Bloger> findByName(String nameSearch) {
-        return blogerRepository.findByName(nameSearch);
+    public Page<Bloger> findAllByNameContainingOrderByDateAsc(String blogName, Pageable pageable) {
+        return blogerRepository.findAllByNameContainingOrderByDateAsc(blogName, pageable);
     }
+
 
     @Override
     public Page<Bloger> findAll(Pageable pageable) {

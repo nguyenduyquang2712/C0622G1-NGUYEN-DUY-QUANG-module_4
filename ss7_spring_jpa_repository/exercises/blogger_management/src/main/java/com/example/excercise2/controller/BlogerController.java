@@ -5,11 +5,14 @@ import com.example.excercise2.model.Category;
 import com.example.excercise2.service.IBlogerService;
 import com.example.excercise2.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
@@ -45,11 +48,12 @@ public class BlogerController {
 
     @GetMapping("/blogers")
     public ModelAndView showBlogList(@PageableDefault(value = 1) Pageable pageable) {
+        Page<Bloger> blogers = blogerService.findAll(pageable);
         List<Category> categories = categoryService.findAll();
         ModelAndView modelAndView = new ModelAndView("blog/index");
         modelAndView.addObject("categories", categories);
-        return new ModelAndView("/blog/index",
-                "blogs", blogerService.findAll(pageable));
+        modelAndView.addObject("blogs",blogers);
+        return modelAndView;
     }
 
     @GetMapping("/edit-blog/{id}")
@@ -115,10 +119,12 @@ public class BlogerController {
     }
 
     @GetMapping("/search")
-    public ModelAndView search(@RequestParam String nameSearch) {
-        List<Bloger> blogers = blogerService.findByName(nameSearch);
-
+    public ModelAndView search(@RequestParam String nameSearch, @PageableDefault(value = 1) Pageable pageable) {
+        Page<Bloger> blogers = blogerService.findAllByNameContainingOrderByDateAsc(nameSearch,pageable);
+        List<Category> categories = categoryService.findAll();
         ModelAndView modelAndView = new ModelAndView("blog/index");
+        modelAndView.addObject("nameSearch",nameSearch);
+        modelAndView.addObject("categories", categories);
         modelAndView.addObject("blogs", blogers);
         return modelAndView;
     }
