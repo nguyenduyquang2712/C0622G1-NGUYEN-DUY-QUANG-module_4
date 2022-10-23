@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+@RequestMapping("/blogers")
 public class BlogerController {
 
     @Autowired
@@ -46,7 +47,7 @@ public class BlogerController {
         return modelAndView;
     }
 
-    @GetMapping("/blogers")
+    @GetMapping("")
     public ModelAndView showBlogList(@PageableDefault(value = 1) Pageable pageable) {
         Page<Bloger> blogers = blogerService.findAll(pageable);
         List<Category> categories = categoryService.findAll();
@@ -101,7 +102,7 @@ public class BlogerController {
     @PostMapping("/delete-blog")
     public String delete(@ModelAttribute("blog") Bloger bloger) {
         blogerService.remove(bloger);
-        return "redirect:blogers";
+        return "redirect:/blogers";
     }
 
     @GetMapping("/view-blog/{id}")

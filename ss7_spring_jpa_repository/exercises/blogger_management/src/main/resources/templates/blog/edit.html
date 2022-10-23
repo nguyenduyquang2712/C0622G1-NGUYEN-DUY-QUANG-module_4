@@ -14,7 +14,7 @@
         <p th:text="${message}"></p>
     </th:block>
 </p>
-<form th:action="@{/edit-blog}" th:object="${blog}" method="post">
+<form th:action="@{/blogers/edit-blog}" th:object="${blog}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <table>
         <tr>
