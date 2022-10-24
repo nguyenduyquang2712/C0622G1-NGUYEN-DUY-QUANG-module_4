@@ -1,8 +1,8 @@
-package com.example.excercise2.controller;
+package com.codegym.controller;
 
 
-import com.example.excercise2.model.Category;
-import com.example.excercise2.service.ICategoryService;
+import com.codegym.model.Category;
+import com.codegym.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

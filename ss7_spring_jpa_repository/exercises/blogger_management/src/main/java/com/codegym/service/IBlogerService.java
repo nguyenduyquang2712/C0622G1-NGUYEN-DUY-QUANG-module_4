@@ -1,10 +1,9 @@
-package com.example.excercise2.service;
+package com.codegym.service;
 
 
-import com.example.excercise2.model.Bloger;
+import com.codegym.model.Bloger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 

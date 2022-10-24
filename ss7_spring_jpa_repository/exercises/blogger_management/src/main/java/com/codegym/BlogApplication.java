@@ -1,13 +1,13 @@
-package com.example.excercise2;
+package com.codegym;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Excercise2Application {
+public class BlogApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Excercise2Application.class, args);
+        SpringApplication.run(BlogApplication.class, args);
     }
 
 }

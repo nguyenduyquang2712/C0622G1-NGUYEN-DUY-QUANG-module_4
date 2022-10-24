@@ -1,4 +1,4 @@
-package com.example.excercise2.model;
+package com.codegym.model;
 
 import javax.persistence.*;
 import java.util.Date;

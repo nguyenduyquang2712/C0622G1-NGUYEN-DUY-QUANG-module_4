@@ -1,6 +1,6 @@
-package com.example.excercise2.service;
+package com.codegym.service;
 
-import com.example.excercise2.model.Category;
+import com.codegym.model.Category;
 
 import java.util.List;
 

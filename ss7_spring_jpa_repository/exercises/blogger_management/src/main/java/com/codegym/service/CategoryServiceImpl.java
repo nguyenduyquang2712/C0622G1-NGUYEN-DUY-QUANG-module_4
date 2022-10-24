@@ -1,10 +1,8 @@
-package com.example.excercise2.service;
+package com.codegym.service;
 
-import com.example.excercise2.model.Category;
-import com.example.excercise2.repository.CategoryRepository;
+import com.codegym.model.Category;
+import com.codegym.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
