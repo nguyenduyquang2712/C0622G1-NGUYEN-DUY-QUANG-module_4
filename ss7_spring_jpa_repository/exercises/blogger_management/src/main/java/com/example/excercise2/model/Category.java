@@ -9,10 +9,16 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private Set<Bloger> blogers;
 
     public Category() {
+    }
+
+    public Category(int id, String name, Set<Bloger> blogers) {
+        this.id = id;
+        this.name = name;
+        this.blogers = blogers;
     }
 
     public int getId() {

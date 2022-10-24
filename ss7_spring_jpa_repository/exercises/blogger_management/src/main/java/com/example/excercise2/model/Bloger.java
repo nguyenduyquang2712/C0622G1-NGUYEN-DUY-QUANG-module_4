@@ -13,7 +13,7 @@ public class Bloger {
     private String content;
     private String author;
     private Date date;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 

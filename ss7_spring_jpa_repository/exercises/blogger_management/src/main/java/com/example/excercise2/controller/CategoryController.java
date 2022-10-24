@@ -37,8 +37,8 @@ public class CategoryController {
 
     @PostMapping("/create-category")
     public ModelAndView createCategory(@ModelAttribute("category") Category category) {
+        Category category1 = category;
         categoryService.save(category);
-
         ModelAndView modelAndView = new ModelAndView("/category/create");
         modelAndView.addObject("category", category);
         modelAndView.addObject("message", "Category created compliment");
