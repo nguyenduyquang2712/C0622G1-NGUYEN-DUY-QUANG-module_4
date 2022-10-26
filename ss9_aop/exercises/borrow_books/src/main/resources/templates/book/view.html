@@ -27,7 +27,7 @@
         <td th:text="${book.author}"></td>
     </tr>
 </table>
-<a th:href="@{/books/order/__${book.id}__}">order</a>
+<a th:href="@{/books/order/__${book.id}__}"><button>Order</button></a>
 <p>Code Book</p>
 <p th:if="${code!=null} " th:text="${code}"></p>
 </body>

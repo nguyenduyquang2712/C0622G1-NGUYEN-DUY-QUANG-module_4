@@ -1,6 +1,9 @@
 package com.codegym.model;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.util.List;
 
 @Entity
@@ -9,6 +12,8 @@ public class OrderBook {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private long code;
+    @Value("0")
+    private int statusCode;
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;
@@ -16,9 +21,10 @@ public class OrderBook {
     public OrderBook() {
     }
 
-    public OrderBook(int id, long code, Book book) {
+    public OrderBook(int id, long code, int statusCode, Book book) {
         this.id = id;
         this.code = code;
+        this.statusCode = statusCode;
         this.book = book;
     }
 
@@ -36,6 +42,14 @@ public class OrderBook {
 
     public void setCode(long code) {
         this.code = code;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
     public Book getBook() {

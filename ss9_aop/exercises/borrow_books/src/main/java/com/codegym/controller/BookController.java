@@ -5,7 +5,6 @@ import com.codegym.model.OrderBook;
 import com.codegym.service.IBookService;
 import com.codegym.service.IOrderBookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,6 +18,7 @@ public class BookController {
     private IBookService iBookService;
     @Autowired
     private IOrderBookService iOrderBookService;
+
     @GetMapping("")
     public ModelAndView showBook() {
         ModelAndView modelAndView = new ModelAndView("book/list");
@@ -26,36 +26,34 @@ public class BookController {
         modelAndView.addObject("books", books);
         return modelAndView;
     }
+
     @GetMapping("/view/{id}")
-    public ModelAndView showDetailBook(@PathVariable int id){
-    Book book = iBookService.findById(id);
-    ModelAndView modelAndView = new ModelAndView("book/view");
-    modelAndView.addObject("book", book);
-    return modelAndView;
+    public ModelAndView showDetailBook(@PathVariable int id) {
+        Book book = iBookService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("book/view");
+        modelAndView.addObject("book", book);
+        return modelAndView;
     }
+
     @GetMapping("/order/{id}")
     public ModelAndView orderBook(@PathVariable int id) throws Exception {
         Book book = iBookService.findById(id);
-
-        book.setCount(book.getCount()-1);
-        if (book.getCount() == -1) {
+        Book validBook = iBookService.borrowBook(book);
+        if (validBook == null) {
             throw new Exception();
         }
-        iBookService.save(book);
-        OrderBook orderBook = new OrderBook();
-        orderBook.setBook(book);
-        long code = (long)(Math.random() * (99999 - 10000 ) + 10000);
-        orderBook.setCode (code);
+        iBookService.save(validBook);
+        OrderBook orderBook = iOrderBookService.generateOrderBook(validBook);
         iOrderBookService.save(orderBook);
-        List<Book> books = iBookService.findAll();
         ModelAndView modelAndView = new ModelAndView("book/view");
-        modelAndView.addObject("book", book);
-        modelAndView.addObject("code",code);
+        modelAndView.addObject("book", validBook);
+        modelAndView.addObject("code", orderBook.getCode());
         return modelAndView;
 
     }
+
     @GetMapping("/return/{id}")
-    public ModelAndView returnBook(@PathVariable int id){
+    public ModelAndView returnBook(@PathVariable int id) {
         Book book = iBookService.findById(id);
         OrderBook orderBook = new OrderBook();
         ModelAndView modelAndView = new ModelAndView("book/return");
@@ -63,22 +61,22 @@ public class BookController {
         modelAndView.addObject("orderBook", orderBook);
         return modelAndView;
     }
+
     @PostMapping("/return")
-    public ModelAndView acceptReturnBook(@RequestParam int id, @ModelAttribute OrderBook orderBook){
+    public ModelAndView acceptReturnBook(@RequestParam int id, @ModelAttribute OrderBook orderBook) {
 
-        OrderBook orderBookFindByCode = iOrderBookService.findOrderBookByCode(orderBook.getCode(),id);
+        OrderBook orderBookFindByCode = iOrderBookService.findOrderBookByCode(orderBook.getCode(), id);
         Book book = iBookService.findById(id);
-
-        if(orderBookFindByCode!=null){
-            book.setCount(book.getCount()+1);
+        if (orderBookFindByCode != null) {
+            book = iBookService.returnBook(book);
             iBookService.save(book);
+            iOrderBookService.deteleBookCode(orderBookFindByCode.getCode());
             ModelAndView modelAndView = new ModelAndView("book/return");
             modelAndView.addObject("mess", "return book success");
             modelAndView.addObject("book", book);
             modelAndView.addObject("orderBook", orderBookFindByCode);
             return modelAndView;
-        }
-        else {
+        } else {
             ModelAndView modelAndView = new ModelAndView("book/return");
             modelAndView.addObject("mess", "valid code");
             modelAndView.addObject("book", book);
@@ -86,8 +84,9 @@ public class BookController {
             return modelAndView;
         }
     }
-    @ExceptionHandler(Exception.class)
-    public String handleError() {
-        return "book/error";
-    }
+
+//    @ExceptionHandler(Exception.class)
+//    public String handleError() {
+//        return "book/error";
+//    }
 }

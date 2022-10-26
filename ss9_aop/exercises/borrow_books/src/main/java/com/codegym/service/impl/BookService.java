@@ -19,8 +19,6 @@ public class BookService implements IBookService {
         bookRepository.save(book);
     }
 
-
-
     @Override
     public Book findById(int id) {
         return bookRepository.findById(id).orElse(new Book());
@@ -30,4 +28,19 @@ public class BookService implements IBookService {
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
+
+    @Override
+    public Book borrowBook(Book book) {
+        if (book.getCount() > 0) {
+            book.setCount(book.getCount() - 1);
+            return book;
+        } else return null;
+    }
+
+    @Override
+    public Book returnBook(Book book) {
+        book.setCount(book.getCount() + 1);
+        return book;
+    }
+
 }

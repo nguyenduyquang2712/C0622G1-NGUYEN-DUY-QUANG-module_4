@@ -7,7 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 public interface IBookService {
-  void save(Book book);
-  Book findById(int id);
-  List<Book> findAll();
+    void save(Book book);
+
+    Book findById(int id);
+
+    List<Book> findAll();
+
+    Book borrowBook(Book book);
+
+    Book returnBook(Book book);
 }

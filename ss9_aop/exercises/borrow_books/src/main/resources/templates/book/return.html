@@ -9,7 +9,7 @@
     <input hidden th:value="${book.id}" th:name="id">
     <p>Code Return Book</p>
     <input th:value="*{id}" hidden>
-    <input type="number" th:field="*{code}"}>
+    <input type="number" th:field="*{code}" } required>
     <input type="submit" value="Return Book">
 </form>
 <p th:text="${mess}"></p>
