@@ -14,6 +14,7 @@
 </th:block>
 <form th:action="@{/songs/edit}" th:object="${songDto}" method="post">
     <table>
+        <input type="hidden" th:field="*{id}">
         <tr>
             <td> Name Song:</td>
             <td>

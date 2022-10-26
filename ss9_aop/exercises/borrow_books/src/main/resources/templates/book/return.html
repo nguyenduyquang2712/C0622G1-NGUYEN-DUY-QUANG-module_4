@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/books/return}" method="post" th:object="${orderBook}">
+    <input hidden th:value="${book.id}" th:name="id">
+    <p>Code Return Book</p>
+    <input th:value="*{id}" hidden>
+    <input type="number" th:field="*{code}"}>
+    <input type="submit" value="Return Book">
+</form>
+<p th:text="${mess}"></p>
+</body>
+</html>
