@@ -85,8 +85,8 @@ public class BookController {
         }
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public String handleError() {
-//        return "book/error";
-//    }
+    @ExceptionHandler(Exception.class)
+    public String handleError() {
+        return "book/error";
+    }
 }
