@@ -12,4 +12,5 @@ public interface ICategoryService {
     void save(Category category);
 
     void remove(Category category);
+    void removeById(int id);
 }

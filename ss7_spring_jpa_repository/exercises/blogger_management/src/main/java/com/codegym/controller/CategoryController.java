@@ -82,7 +82,7 @@ public class CategoryController {
 
     @PostMapping("/delete-category")
     public String deleteCategory(@ModelAttribute("category") Category category) {
-        categoryService.remove(category);
+        categoryService.removeById(category.getId());
 
         return "redirect:categorys";
     }

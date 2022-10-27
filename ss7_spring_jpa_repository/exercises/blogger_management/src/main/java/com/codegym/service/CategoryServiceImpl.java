@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+
 public class CategoryServiceImpl implements ICategoryService {
 
     @Autowired
@@ -30,5 +31,10 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public void remove(Category category) {
           categoryRepository.delete(category);
+    }
+
+    @Override
+    public void removeById(int id) {
+        categoryRepository.deleteById(id);
     }
 }
