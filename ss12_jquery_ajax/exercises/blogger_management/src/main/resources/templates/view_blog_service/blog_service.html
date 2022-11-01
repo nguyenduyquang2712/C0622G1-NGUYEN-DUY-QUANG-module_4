@@ -20,7 +20,7 @@
 <button id="searchBlog" type="button">Search</button>
 <br>
 <button id="loading" type="button">Loading</button>
-<input id="pageNumber" value="0" type="number" hidden>
+<input id="pageNumber" value="0" type="number" >
 <table class="table table-success table-striped">
     <thead>
     <tr>
@@ -109,11 +109,12 @@
                             tr.push("</tr>")
                         }
                         $("tbody").append(tr.join(""));
+                        $("#pageNumber").val(parseInt($("#pageNumber").val()) + 1)
+
                     }
                 })
             }, 2000);
         }
-
         init();
         $("#loading").click(function () {
             $.ajax({
@@ -132,7 +133,7 @@
                         tr.push("</tr>")
                     }
                     $("tbody").append(tr.join(""));
-                    $("#pageNumber").val($("#pageNumber").val() + 1)
+                    $("#pageNumber").val(parseInt($("#pageNumber").val()) + 1)
                 }
             })
         })
