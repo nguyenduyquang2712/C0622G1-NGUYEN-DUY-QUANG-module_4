@@ -90,6 +90,7 @@
         crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
+        let pageNumber = 1;
         function init() {
             setTimeout(function () {
                 $("tbody").empty();
@@ -109,7 +110,6 @@
                             tr.push("</tr>")
                         }
                         $("tbody").append(tr.join(""));
-                        $("#pageNumber").val(parseInt($("#pageNumber").val()) + 1)
 
                     }
                 })
@@ -118,7 +118,7 @@
         init();
         $("#loading").click(function () {
             $.ajax({
-                url: "http://localhost:8080/api/blogers" + "?page=" + $("#pageNumber").val(),
+                url: "http://localhost:8080/api/blogers" + "?page=" + pageNumber,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -133,7 +133,7 @@
                         tr.push("</tr>")
                     }
                     $("tbody").append(tr.join(""));
-                    $("#pageNumber").val(parseInt($("#pageNumber").val()) + 1)
+                    pageNumber++
                 }
             })
         })
