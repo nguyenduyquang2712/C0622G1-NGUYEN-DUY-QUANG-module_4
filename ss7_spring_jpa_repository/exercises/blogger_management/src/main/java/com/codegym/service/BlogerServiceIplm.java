@@ -1,8 +1,6 @@
 package com.codegym.service;
 
 
-import com.codegym.model.Bloger;
-import com.codegym.repository.BlogerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +13,7 @@ import java.util.List;
 public class BlogerServiceIplm implements IBlogerService {
 
     @Autowired
-    private BlogerRepository blogerRepository ;
+    private IBlogerService blogerRepository ;
 
     @Override
     public List<Bloger> findAll() {
