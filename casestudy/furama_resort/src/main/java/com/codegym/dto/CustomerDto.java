@@ -1,8 +1,10 @@
 package com.codegym.dto;
 
+import com.codegym.model.contract.Contract;
 import com.codegym.model.customer.CustomerType;
 
 import java.sql.Date;
+import java.util.Set;
 
 public class CustomerDto {
     private int id;
@@ -13,21 +15,26 @@ public class CustomerDto {
     private String phoneNumber;
     private String email;
     private String address;
+    private Integer status = 1;
     private CustomerType customerType;
-
+    private     Set<Contract> contracts;
     public CustomerDto() {
     }
 
-    public CustomerDto(int id, String name, Date dateOfBirth, int gender, String idCard, String phoneNumber, String email, String address, CustomerType customerType) {
-        this.id = id;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.idCard = idCard;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
-        this.customerType = customerType;
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Set<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(Set<Contract> contracts) {
+        this.contracts = contracts;
     }
 
     public int getId() {

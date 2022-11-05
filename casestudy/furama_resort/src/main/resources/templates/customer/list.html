@@ -53,7 +53,13 @@
             <td th:text="${customer.address}"></td>
             <td th:text="${customer.customerType.name}"></td>
             <td><a class="btn btn-danger" th:href="@{/customers/edit/__${customer.id}__}">edit</a></td>
-            <td><a class="btn btn-danger" th:href="@{/customers/delete/__${customer.id}__}">delete</a></td>
+            <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal" th:attr="onclick=|infoDelete('${customer.id}', '${customer.name}')|">
+                    Delete
+                </button>
+            </td>
         </tr>
     </th:block>
     </tbody>
@@ -67,5 +73,35 @@
     <a th:href="@{'/customers'(page=${customers.number + 1},nameSearch=${nameSearch},email=${email},customerType=${customerType})}"
        th:if="${customers.hasNext()}">Next</a>
 </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Customer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Are you sure you want to delete <span style="color: red" id="nameDelete"></span>?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <form action="/customers/delete">
+                    <input type="text" name="idDelete" id="id"  hidden>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function infoDelete(id, name) {
+        document.getElementById("nameDelete").innerText = name;
+        document.getElementById("id").value = id;
+    }
+</script>
 </body>
 </html>

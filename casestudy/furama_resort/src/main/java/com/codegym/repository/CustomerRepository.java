@@ -24,9 +24,12 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
                                                      @Param("type") String type,
                                                      Pageable pageable);
 
+    @Query(value="select * from `customer` where `status`=1", nativeQuery = true)
+    Page<Customer>  findAll(Pageable pageable);
     @Transactional
     @Modifying
-    @Query(value = "update customer set status = 0 where id = :id;", nativeQuery = true)
+    @Query(value = "update customer set `status` = 0 where id = :id", nativeQuery = true)
     void remove(@Param("id") int id);
+
 
 }
