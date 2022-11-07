@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/facilities")
@@ -46,21 +47,22 @@ public class FacilityController {
     public ModelAndView showFormCreate() {
         ModelAndView modelAndView = new ModelAndView("facility/create");
         modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
-        modelAndView.addObject("facilityTypeList",facilityService.findAllFacilityType());
+        modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
         modelAndView.addObject("facilityDto", new FacilityDto());
         return modelAndView;
     }
+
     @PostMapping("/create")
     public ModelAndView create(@ModelAttribute @Validated FacilityDto facilityDto, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
             ModelAndView modelAndView = new ModelAndView("facility/create");
+            bindingResult.getErrorCount();
             modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
             modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
             modelAndView.addObject("facilityTypeId", facilityDto.getFacilityType().getId());
             modelAndView.addObject("facilityDto", facilityDto);
-            return modelAndView;
+            bindingResult.getErrorCount();
         }
-
         ModelAndView modelAndView = new ModelAndView("facility/create");
         modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
         modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
@@ -72,10 +74,45 @@ public class FacilityController {
         facilityService.save(facility);
         return modelAndView;
     }
+    @GetMapping("/edit/{id}/{facilityTypeId}")
+    public ModelAndView showFormUpdate(@PathVariable(value = "id") int id,
+                                       @PathVariable(value = "facilityTypeId") int facilityTypeId){
+        Optional<Facility> optionalFacility = facilityService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("facility/edit");
+        if(!optionalFacility.isPresent()){
+            modelAndView.addObject("message", "Facility is not found");
+            return modelAndView;
+        }
+        FacilityDto facilityDto = new FacilityDto();
+        BeanUtils.copyProperties(optionalFacility.get(),facilityDto);
+        modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
+        modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
+        modelAndView.addObject("facilityDto", facilityDto);
+        return modelAndView;
+    }
+    @PostMapping("/edit")
+    public ModelAndView edit(@ModelAttribute @Validated FacilityDto facilityDto, BindingResult bindingResult){
+        if (bindingResult.hasFieldErrors()){
+            ModelAndView modelAndView = new ModelAndView("facility/edit");
+            modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
+            modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
+            modelAndView.addObject("facilityDto", facilityDto);
+            return modelAndView;
+        }
+        ModelAndView modelAndView = new ModelAndView("facility/edit");
+        modelAndView.addObject("facilityDTO", facilityDto);
+        modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
+        modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
+        modelAndView.addObject("message", "Edit Successful");
+        Facility facility = new Facility();
+        BeanUtils.copyProperties(facilityDto, facility);
+        facilityService.save(facility);
+        return modelAndView;
+    }
     @GetMapping("/delete")
-    public String deleteFacility(@RequestParam(value = "idDelete") int id, RedirectAttributes redirectAttributes){
+    public String deleteFacility(@RequestParam(value = "idDelete") int id, RedirectAttributes redirectAttributes) {
         facilityService.remove(id);
-        redirectAttributes.addFlashAttribute("message","Delete facility successfully!");
+        redirectAttributes.addFlashAttribute("message", "Delete facility successfully!");
         return "redirect:/facilities";
     }
 }

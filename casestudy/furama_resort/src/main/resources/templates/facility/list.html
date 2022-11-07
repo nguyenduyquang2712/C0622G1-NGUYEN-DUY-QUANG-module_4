@@ -9,7 +9,7 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
 </head>
-<body>
+<body style=" background-image: url(https://img.wallpapersafari.com/desktop/1600/900/22/47/iU4Gez.jpg);">
 <header style="text-align: center;margin: 5px">
     <h1>List Facility</h1>
     <div><a href="/home">
@@ -28,6 +28,9 @@
         <input type="submit" value="Search">
     </form>
 </header>
+<th:block th:if="${message}">
+    <h2 th:text="${message}"></h2>
+</th:block>
 <table class="table table-dark" style="text-align: center" border="1">
     <thead>
     <tr>
@@ -62,7 +65,7 @@
             <td th:text="${facility.facilityFree}"></td>
             <td th:text="${facility.rentType.name}"></td>
             <td th:text="${facility.facilityType.name}"></td>
-            <td><a class="btn btn-danger" th:href="@{/facilities/edit/__${facility.id}__}">edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{/facilities/edit/__${facility.id}__/__${facility.facilityType.id}__}">edit</a></td>
             <td>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -76,10 +79,11 @@
     </tbody>
 </table>
 <div>
-    <a th:href="@{'/facilities'(page=${facilities.number - 1},nameSearch=${nameSearch},facilityType=${facilityType})}"
+    <a class="btn btn-primary" th:href="@{'/facilities'(page=${facilities.number - 1},nameSearch=${nameSearch},facilityType=${facilityType})}"
        th:if="${facilities.hasPrevious()}">Previous</a>
-    <span th:text="${facilities.number+1}"></span> / <span th:text="${facilities.totalPages}"></span>
-    <a th:href="@{'/facilities'(page=${facilities.number + 1},nameSearch=${nameSearch},facilityType=${facilityType})}"
+    <span style="color: gold; font-weight: bold" th:text="${facilities.number+1}"></span ><span style="color: gold; font-weight: bold" >/</span><span
+        style="color: gold; font-weight: bold" th:text="${facilities.totalPages}"></span>
+    <a class="btn btn-primary" th:href="@{'/facilities'(page=${facilities.number + 1},nameSearch=${nameSearch},facilityType=${facilityType})}"
        th:if="${facilities.hasNext()}">Next</a>
 </div>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"

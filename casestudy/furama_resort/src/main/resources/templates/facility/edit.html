@@ -6,14 +6,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<h1>Form Create Facility</h1>
+<h1>Form Edit Facility</h1>
 <p>
-    <a href="/facilities">Back to customer list</a>
+    <a href="/facilities">Back to facility list</a>
 </p>
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/facilities/create}" th:object="${facilityDto}" method="post">
+<form th:action="@{/facilities/edit}" th:object="${facilityDto}" method="post">
+    <input  th:field="*{id}" hidden>
+<!--    <input hidden th:field="*{facilityType}" id="facilityType">-->
     <table>
         <tr>
             <td>Facility Type :</td>
@@ -79,29 +81,45 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Create Facility"></td>
+            <td><input type="submit" value="Update Facility"></td>
         </tr>
     </table>
 </form>
 <script>
-    $('#facilityFree').hide();
-    $('#poolArea').show();
-    $('#numberFloors').show();
-
+    if ($('#facilityType').val() === '1') {
+        $('#facilityFree').hide();
+        $('#poolArea').show();
+        $('#numberFloors').show();
+    }
+    if ($('#facilityType').val() === '2') {
+        $('#facilityFree').hide();
+        $('#poolArea').hide();
+        $('#numberFloors').show();
+    }
+    if ($('#facilityType').val() === '3') {
+        $('#poolArea').hide();
+        $('#numberFloors').hide();
+        $('#facilityFree').show();
+    }
     $('#facilityType').change(function () {
         if ($(this).val() === '1') {
             $('#facilityFree').hide();
+            $('#facilityFree').val("");
             $('#poolArea').show();
             $('#numberFloors').show();
         }
         if ($(this).val() === '2') {
             $('#facilityFree').hide();
+            $('#facilityFree').val("");
             $('#poolArea').hide();
+            $('#poolArea').val("0");
             $('#numberFloors').show();
         }
         if ($(this).val() === '3') {
             $('#poolArea').hide();
+            $('#poolArea').val("0");
             $('#numberFloors').hide();
+            $('#numberFloors').val("0");
             $('#facilityFree').show();
         }
     });

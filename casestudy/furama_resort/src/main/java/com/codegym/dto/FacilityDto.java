@@ -13,6 +13,7 @@ public class FacilityDto {
     private int area;
     private double cost;
     private int maxPeople;
+    @NotEmpty
     private String standardRoom;
     private String descriptionOtherConvenience;
     private double poolArea;
