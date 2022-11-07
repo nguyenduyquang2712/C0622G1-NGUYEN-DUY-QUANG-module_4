@@ -57,12 +57,17 @@ public class CustomerController {
 
     @GetMapping("")
     public ModelAndView showCustomers(@RequestParam(value = "nameSearch", defaultValue = "") String nameSearch,
-                                      @RequestParam(value = "email", defaultValue = "") String email, @RequestParam(value = "customerType", defaultValue = "") String customerType, @PageableDefault(value = 3) Pageable pageable) {
+                                      @RequestParam(value = "email", defaultValue = "") String email,
+                                      @RequestParam(value = "customerType", defaultValue = "") String customerType,
+                                      @PageableDefault(value = 3) Pageable pageable) {
         Page<Customer> customers = customerService.findByNameAndEmailAndCustomerType(nameSearch, email, customerType, pageable);
         List<CustomerType> customerTypeList = customerTypeService.findAll();
         ModelAndView modelAndView = new ModelAndView("customer/list");
         modelAndView.addObject("customers", customers);
         modelAndView.addObject("customerTypeList", customerTypeList);
+        modelAndView.addObject("nameSearch", nameSearch);
+        modelAndView.addObject("email", email);
+        modelAndView.addObject("customerType",customerType);
         return modelAndView;
     }
     @GetMapping("/edit/{id}")

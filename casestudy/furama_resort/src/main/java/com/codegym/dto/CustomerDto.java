@@ -17,7 +17,7 @@ public class CustomerDto {
     private String address;
     private Integer status = 1;
     private CustomerType customerType;
-    private     Set<Contract> contracts;
+    private Set<Contract> contracts;
     public CustomerDto() {
     }
 

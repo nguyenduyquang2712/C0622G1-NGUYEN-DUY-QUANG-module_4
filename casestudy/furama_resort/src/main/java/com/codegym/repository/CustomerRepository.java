@@ -16,7 +16,7 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
-    @Query(value = "select c.* from `customer` c inner join `customer_type` ct " +
+    @Query(value = "select c.* from `customer` c  join `customer_type` ct " +
             "on c.customer_type_id = ct.id " +
             "where c.name like %:name% and c.email like %:email% and ct.name like %:type% and c.status= 1", nativeQuery = true)
     Page<Customer> findByNameAndEmailAndCustomerType(@Param("name") String name,

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<h1>Form Create Facility</h1>
+<p>
+    <a href="/facilities">Back to customer list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/facilities/create}" th:object="${facilityDto}" method="post">
+    <table>
+        <tr>
+            <td>Facility Type :</td>
+            <td><select id="facilityType" th:field="*{facilityType}">
+                <option th:each="item: ${facilityTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td> Name Customer:</td>
+            <td>
+                <input type="text" th:field="*{name}"></td>
+            <td style="color: red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></td>
+            </td>
+        </tr>
+        <tr>
+            <td>Area :</td>
+            <td><input type="text" th:field="*{area}"></td>
+            <td style="color: red" th:errors="*{area}" th:if="${#fields.hasErrors('area')}"></td>
+        </tr>
+        <tr>
+            <td>Cost:</td>
+            <td><input type="text" th:field="*{cost}"></td>
+            <td style="color: red" th:errors="*{cost}" th:if="${#fields.hasErrors('cost')}"></td>
+        </tr>
+        <tr>
+            <td>Max People :</td>
+            <td><input type="text" th:field="*{maxPeople}"></td>
+            <td style="color: red" th:errors="*{maxPeople}" th:if="${#fields.hasErrors('maxPeople')}"></td>
+        </tr>
+        <tr>
+            <td>Standard Room :</td>
+            <td><input type="text" th:field="*{standardRoom}"></td>
+            <td style="color: red" th:errors="*{standardRoom}" th:if="${#fields.hasErrors('standardRoom')}"></td>
+        </tr>
+        <tr>
+            <td>descriptionOtherConvenience :</td>
+            <td><input type="text" th:field="*{descriptionOtherConvenience}"></td>
+            <td style="color: red" th:errors="*{descriptionOtherConvenience}" th:if="${#fields.hasErrors('descriptionOtherConvenience')}"></td>
+        </tr>
+        <tr id="poolArea">
+            <td>poolArea :</td>
+            <td><input type="text" th:field="*{poolArea}"></td>
+            <td style="color: red" th:errors="*{poolArea}" th:if="${#fields.hasErrors('poolArea')}"></td>
+        </tr>
+        <tr  id="numberFloors">
+            <td>numberOfFloors :</td>
+            <td><input type="text" th:field="*{numberOfFloors}"></td>
+            <td style="color: red" th:errors="*{numberOfFloors}" th:if="${#fields.hasErrors('numberOfFloors')}"></td>
+        </tr>
+        <tr id="facilityFree">
+            <td>facilityFree :</td>
+            <td><input type="text" th:field="*{facilityFree}"></td>
+            <td style="color: red" th:errors="*{facilityFree}" th:if="${#fields.hasErrors('facilityFree')}"></td>
+
+        <tr>
+            <td>Rent Type :</td>
+            <td>
+                <select th:field="*{rentType}">
+                    <option th:each="item: ${RentTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create Facility"></td>
+        </tr>
+    </table>
+</form>
+<script>
+    $('#facilityFree').hide();
+    $('#poolArea').show();
+    $('#numberFloors').show();
+
+    $('#facilityType').change(function () {
+        if ($(this).val() === '1') {
+            $('#facilityFree').hide();
+            $('#poolArea').show();
+            $('#numberFloors').show();
+        }
+        if ($(this).val() === '2') {
+            $('#facilityFree').hide();
+            $('#poolArea').hide();
+            $('#numberFloors').show();
+        }
+        if ($(this).val() === '3') {
+            $('#poolArea').hide();
+            $('#numberFloors').hide();
+            $('#facilityFree').show();
+        }
+    });
+</script>
+</body>
+</html>
