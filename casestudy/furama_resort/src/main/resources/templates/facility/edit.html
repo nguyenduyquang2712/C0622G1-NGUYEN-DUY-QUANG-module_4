@@ -88,18 +88,17 @@
 <script>
     if ($('#facilityType').val() === '1') {
         $('#facilityFree').hide();
-        $('#poolArea').show();
-        $('#numberFloors').show();
+
     }
     if ($('#facilityType').val() === '2') {
         $('#facilityFree').hide();
         $('#poolArea').hide();
-        $('#numberFloors').show();
+
     }
     if ($('#facilityType').val() === '3') {
         $('#poolArea').hide();
         $('#numberFloors').hide();
-        $('#facilityFree').show();
+
     }
     $('#facilityType').change(function () {
         if ($(this).val() === '1') {

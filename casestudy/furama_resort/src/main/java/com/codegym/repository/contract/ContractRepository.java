@@ -18,7 +18,7 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
             "                 ct.start_date AS startDate,\n" +
             "                   ct.end_date AS endDate,\n" +
             "                    ct.deposit,\n" +
-            "                   ((IFNULL(SUM(cd.quantity * af.cost), 0) + f.cost)) AS total\n" +
+            "                   (IFNULL(SUM(cd.quantity * af.cost), 0) + IFNULL(f.cost,0)) AS total\n" +
             "                FROM\n" +
             "                contract ct\n" +
             "                       LEFT JOIN\n" +
