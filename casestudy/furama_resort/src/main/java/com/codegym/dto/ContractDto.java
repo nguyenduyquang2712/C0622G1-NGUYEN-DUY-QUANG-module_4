@@ -1,52 +1,25 @@
-package com.codegym.model.contract;
+package com.codegym.dto;
 
+import com.codegym.model.contract.ContractDetail;
 import com.codegym.model.customer.Customer;
 import com.codegym.model.employee.Employee;
 import com.codegym.model.facility.Facility;
 
-import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
-@Entity
-public class Contract {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ContractDto {
     private int id;
     private java.sql.Date startDate;
     private java.sql.Date endDate;
     private double deposit;
-    @Column(columnDefinition = "int default 1")
     private int status = 1;
-
-    @OneToMany(mappedBy = "contract")
     private Set<ContractDetail> contractDetails;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "facility_id", referencedColumnName = "id")
     private Facility facility;
 
-    public Contract() {
-    }
-
-    public Contract(int id, java.sql.Date startDate, java.sql.Date endDate, double deposit, int status, Set<ContractDetail> contractDetails, Employee employee, Customer customer, Facility facility) {
-        this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.deposit = deposit;
-        this.status = status;
-        this.contractDetails = contractDetails;
-        this.employee = employee;
-        this.customer = customer;
-        this.facility = facility;
+    public ContractDto() {
     }
 
     public int getId() {
@@ -61,7 +34,7 @@ public class Contract {
         return startDate;
     }
 
-    public void setStartDate(java.sql.Date startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
@@ -69,7 +42,7 @@ public class Contract {
         return endDate;
     }
 
-    public void setEndDate(java.sql.Date endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

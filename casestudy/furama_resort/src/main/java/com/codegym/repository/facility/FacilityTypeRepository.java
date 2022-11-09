@@ -1,4 +1,4 @@
-package com.codegym.repository;
+package com.codegym.repository.facility;
 
 import com.codegym.model.facility.FacilityType;
 import org.springframework.data.jpa.repository.JpaRepository;

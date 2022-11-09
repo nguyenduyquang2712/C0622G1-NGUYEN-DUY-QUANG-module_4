@@ -3,9 +3,10 @@ package com.codegym.service.impl;
 import com.codegym.model.facility.Facility;
 import com.codegym.model.facility.FacilityType;
 import com.codegym.model.facility.RentType;
-import com.codegym.repository.FacilityRepository;
-import com.codegym.repository.FacilityTypeRepository;
-import com.codegym.repository.RentTypeRepository;
+
+import com.codegym.repository.facility.FacilityRepository;
+import com.codegym.repository.facility.FacilityTypeRepository;
+import com.codegym.repository.facility.RentTypeRepository;
 import com.codegym.service.IFacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,11 @@ public class FacilityService implements IFacilityService {
     @Override
     public Page<Facility> findAllByNameAndType(String name, String type, Pageable pageable) {
         return facilityRepository.findAllByNameAndType(name, type, pageable);
+    }
+
+    @Override
+    public List<Facility> findAll() {
+        return facilityRepository.findAll();
     }
 
     @Override

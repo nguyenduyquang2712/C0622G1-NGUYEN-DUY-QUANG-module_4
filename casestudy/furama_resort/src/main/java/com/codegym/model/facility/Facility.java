@@ -3,6 +3,7 @@ package com.codegym.model.facility;
 import com.codegym.model.contract.Contract;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Facility {
@@ -29,8 +30,8 @@ public class Facility {
     @JoinColumn(name = "facility_type_id", referencedColumnName = "id")
     private FacilityType facilityType;
 
-    @OneToOne(mappedBy = "facility")
-    private Contract contract;
+    @OneToMany(mappedBy = "facility")
+    private Set<Contract> contracts;
 
     public Facility() {
     }
@@ -49,7 +50,7 @@ public class Facility {
         this.status = status;
         this.rentType = rentType;
         this.facilityType = facilityType;
-        this.contract = contract;
+        this.contracts = contracts;
     }
 
     public int getId() {
@@ -156,11 +157,11 @@ public class Facility {
         this.facilityType = facilityType;
     }
 
-    public Contract getContract() {
-        return contract;
+    public Set<Contract> getContracts() {
+        return contracts;
     }
 
-    public void setContract(Contract contract) {
-        this.contract = contract;
+    public void setContracts(Set<Contract> contracts) {
+        this.contracts = contracts;
     }
 }

@@ -1,4 +1,4 @@
-package com.codegym.repository;
+package com.codegym.repository.facility;
 
 import com.codegym.model.facility.Facility;
 import org.springframework.data.domain.Page;
@@ -16,8 +16,8 @@ public interface FacilityRepository extends JpaRepository<Facility,Integer> {
             "on f.facility_type_id = ft.id " +
             "where f.name like %:name% and ft.name like %:type% and f.status= 1", nativeQuery = true)
     Page<Facility> findAllByNameAndType(@Param("name") String nameSearch,
-                          @Param("type")  String facilityType,
-                          Pageable pageable);
+                                        @Param("type")  String facilityType,
+                                        Pageable pageable);
 
     @Transactional
     @Modifying

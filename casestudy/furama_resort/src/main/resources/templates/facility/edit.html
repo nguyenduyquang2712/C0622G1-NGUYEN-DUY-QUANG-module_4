@@ -58,17 +58,17 @@
         </tr>
         <tr id="poolArea">
             <td>poolArea :</td>
-            <td><input type="text" th:field="*{poolArea}"></td>
+            <td><input id="poolAreaValue" type="text" th:field="*{poolArea}"></td>
             <td style="color: red" th:errors="*{poolArea}" th:if="${#fields.hasErrors('poolArea')}"></td>
         </tr>
         <tr  id="numberFloors">
             <td>numberOfFloors :</td>
-            <td><input type="text" th:field="*{numberOfFloors}"></td>
+            <td><input id="numberFloorsValue" type="text" th:field="*{numberOfFloors}"></td>
             <td style="color: red" th:errors="*{numberOfFloors}" th:if="${#fields.hasErrors('numberOfFloors')}"></td>
         </tr>
         <tr id="facilityFree">
             <td>facilityFree :</td>
-            <td><input type="text" th:field="*{facilityFree}"></td>
+            <td><input id="facilityFreeValue" type="text" th:field="*{facilityFree}"></td>
             <td style="color: red" th:errors="*{facilityFree}" th:if="${#fields.hasErrors('facilityFree')}"></td>
 
         <tr>
@@ -104,22 +104,22 @@
     $('#facilityType').change(function () {
         if ($(this).val() === '1') {
             $('#facilityFree').hide();
-            $('#facilityFree').val("");
+            $('#facilityFreeValue').val("");
             $('#poolArea').show();
             $('#numberFloors').show();
         }
         if ($(this).val() === '2') {
             $('#facilityFree').hide();
-            $('#facilityFree').val("");
+            $('#facilityFreeValue').val("");
             $('#poolArea').hide();
-            $('#poolArea').val("0");
+            $('#poolAreaValue').val("0");
             $('#numberFloors').show();
         }
         if ($(this).val() === '3') {
             $('#poolArea').hide();
-            $('#poolArea').val("0");
+            $('#poolAreaValue').val("0");
             $('#numberFloors').hide();
-            $('#numberFloors').val("0");
+            $('#numberFloorsValue').val("0");
             $('#facilityFree').show();
         }
     });

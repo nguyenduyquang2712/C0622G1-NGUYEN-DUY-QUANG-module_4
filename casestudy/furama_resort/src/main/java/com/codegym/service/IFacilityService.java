@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public interface IFacilityService {
     Page<Facility> findAllByNameAndType(String name, String type, Pageable pageable);
+    List<Facility>findAll();
     void save(Facility facility);
     Optional<Facility> findById(int id);
     void remove(int id);
