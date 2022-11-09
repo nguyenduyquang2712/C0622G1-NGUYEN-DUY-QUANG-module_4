@@ -28,12 +28,16 @@ public class CustomerController {
     @Autowired
     private ICustomerTypeService customerTypeService;
 
+@ModelAttribute ("customerTypeList")
+List<CustomerType> getCustomerTypes(){
+    return customerTypeService.findAll();
+}
+
     @GetMapping("/create")
     public ModelAndView creatCustomer() {
         List<CustomerType> customerTypeList = customerTypeService.findAll();
         ModelAndView modelAndView = new ModelAndView("customer/create");
         modelAndView.addObject("customerDto", new CustomerDto());
-        modelAndView.addObject("customerTypeList", customerTypeList);
         return modelAndView;
     }
 
@@ -46,9 +50,7 @@ public class CustomerController {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
             customerService.save(customer);
-            List<CustomerType> customerTypeList = customerTypeService.findAll();
             ModelAndView modelAndView = new ModelAndView("customer/create");
-            modelAndView.addObject("customerTypeList", customerTypeList);
             modelAndView.addObject("customerDto", customerDto);
             modelAndView.addObject("message", "New customer created successfully");
             return modelAndView;
@@ -61,10 +63,8 @@ public class CustomerController {
                                       @RequestParam(value = "customerType", defaultValue = "") String customerType,
                                       @PageableDefault(value = 3) Pageable pageable) {
         Page<Customer> customers = customerService.findByNameAndEmailAndCustomerType(nameSearch, email, customerType, pageable);
-        List<CustomerType> customerTypeList = customerTypeService.findAll();
         ModelAndView modelAndView = new ModelAndView("customer/list");
         modelAndView.addObject("customers", customers);
-        modelAndView.addObject("customerTypeList", customerTypeList);
         modelAndView.addObject("nameSearch", nameSearch);
         modelAndView.addObject("email", email);
         modelAndView.addObject("customerType",customerType);
@@ -82,7 +82,6 @@ public class CustomerController {
         BeanUtils.copyProperties(optionalCustomer.get(), customerDto);
         List<CustomerType> customerTypeList = customerTypeService.findAll();
         modelAndView.addObject("customerDto", customerDto);
-        modelAndView.addObject("customerTypeList", customerTypeList);
         return modelAndView;
     }
     @PostMapping("/edit")
@@ -95,9 +94,7 @@ public class CustomerController {
             BeanUtils.copyProperties(customerDto,customer);
             customerService.save(customer);
             ModelAndView modelAndView = new ModelAndView("customer/edit");
-            List<CustomerType> customerTypeList = customerTypeService.findAll();
             modelAndView.addObject("customerDto", customerDto);
-            modelAndView.addObject("customerTypeList", customerTypeList);
             modelAndView.addObject("message", "Customer edited successfully");
             return modelAndView;
         }

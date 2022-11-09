@@ -27,17 +27,22 @@ public class FacilityController {
     @Autowired
     private IFacilityService facilityService;
 
+    @ModelAttribute("RentTypeList")
+    List<RentType> getRentTypes(){
+        return facilityService.findAllRentType();
+    }
+    @ModelAttribute("facilityTypeList")
+    List<FacilityType> getFacilityTypes(){
+        return facilityService.findAllFacilityType();
+    }
     @GetMapping("")
     public ModelAndView showFacilities(@RequestParam(value = "nameSearch", defaultValue = "") String nameSearch,
                                        @RequestParam(value = "facilityType", defaultValue = "") String facilityType,
                                        @PageableDefault(value = 3) Pageable pageable) {
         Page<Facility> facilities = facilityService.findAllByNameAndType(nameSearch, facilityType, pageable);
-        List<FacilityType> facilityTypeList = facilityService.findAllFacilityType();
-        List<RentType> rentTypeList = facilityService.findAllRentType();
+
         ModelAndView modelAndView = new ModelAndView("facility/list");
         modelAndView.addObject("facilities", facilities);
-        modelAndView.addObject("facilityTypeList", facilityTypeList);
-        modelAndView.addObject("rentTypeList", rentTypeList);
         modelAndView.addObject("nameSearch", nameSearch);
         modelAndView.addObject("facilityType", facilityType);
         return modelAndView;
@@ -46,8 +51,6 @@ public class FacilityController {
     @GetMapping("/create")
     public ModelAndView showFormCreate() {
         ModelAndView modelAndView = new ModelAndView("facility/create");
-        modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
-        modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
         modelAndView.addObject("facilityDto", new FacilityDto());
         return modelAndView;
     }
@@ -57,15 +60,11 @@ public class FacilityController {
         if (bindingResult.hasFieldErrors()) {
             ModelAndView modelAndView = new ModelAndView("facility/create");
             bindingResult.getErrorCount();
-            modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
-            modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
             modelAndView.addObject("facilityTypeId", facilityDto.getFacilityType().getId());
             modelAndView.addObject("facilityDto", facilityDto);
             bindingResult.getErrorCount();
         }
         ModelAndView modelAndView = new ModelAndView("facility/create");
-        modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
-        modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
         modelAndView.addObject("facilityTypeId", facilityDto.getFacilityType().getId());
         modelAndView.addObject("facilityDto", facilityDto);
         modelAndView.addObject("message", "Add new Successful");
@@ -85,8 +84,6 @@ public class FacilityController {
         }
         FacilityDto facilityDto = new FacilityDto();
         BeanUtils.copyProperties(optionalFacility.get(),facilityDto);
-        modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
-        modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
         modelAndView.addObject("facilityDto", facilityDto);
         return modelAndView;
     }
@@ -94,15 +91,11 @@ public class FacilityController {
     public ModelAndView edit(@ModelAttribute @Validated FacilityDto facilityDto, BindingResult bindingResult){
         if (bindingResult.hasFieldErrors()){
             ModelAndView modelAndView = new ModelAndView("facility/edit");
-            modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
-            modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
             modelAndView.addObject("facilityDto", facilityDto);
             return modelAndView;
         }
         ModelAndView modelAndView = new ModelAndView("facility/edit");
         modelAndView.addObject("facilityDTO", facilityDto);
-        modelAndView.addObject("RentTypeList", facilityService.findAllRentType());
-        modelAndView.addObject("facilityTypeList", facilityService.findAllFacilityType());
         modelAndView.addObject("message", "Edit Successful");
         Facility facility = new Facility();
         BeanUtils.copyProperties(facilityDto, facility);
