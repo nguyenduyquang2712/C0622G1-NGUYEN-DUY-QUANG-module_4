@@ -27,7 +27,7 @@
             <button class="btn btn-primary btn-outline-secondary btn-sm" data-bs-toggle="modal"
                     data-bs-target="#addContract">
                 <span class="fa-solid fa-plus text-light h6 my-auto me-1">+</span>
-                <span class="text-light"> Thêm mới hợp đồng</span>
+                <span class="text-light"> Add New Contract</span>
             </button>
         </div>
     </nav>
@@ -35,18 +35,20 @@
     <table class="table table-light table-striped table-bordered">
         <tr class="table-dark text-light">
             <th class="text-center"><i class="fa-sharp fa-solid fa-bolt"></i></th>
-            <th>Tên dịch vụ</th>
-            <th>Tên khách hàng</th>
-            <th>Ngày bắt đầu</th>
-            <th>Ngày kết thúc</th>
-            <th>Tiền đặt cọc</th>
-            <th>Tổng tiền</th>
-            <th class="text-center">Các dịch vụ đi kèm</th>
+            <th>Service</th>
+            <th>Employee</th>
+            <th>Customer</th>
+            <th>Date Start</th>
+            <th>Date End</th>
+            <th>Deposit</th>
+            <th>Total Money</th>
+            <th class="text-center">Attach Facilities</th>
         </tr>
 
         <tr th:each="contractNew, status : ${contractList}">
             <td class="text-center" th:text="${status.count}"></td>
             <td th:text="${contractNew.getFacilityName()}"></td>
+            <td th:text="${contractNew.getEmployeeName()}"></td>
             <td th:text="${contractNew.getCustomerName()}"></td>
             <td th:text="${contractNew.getStartDate()}"></td>
             <td th:text="${contractNew.getEndDate()}"></td>
@@ -59,16 +61,11 @@
                     <span class="fa-solid fa-plus text-light h6 m-auto">+</span>
                 </button>
 
-                <!--                <a th:href="@{/contract/__${contract.contractId}__}">-->
-                <!--                    <button class="btn btn-primary btn-outline-secondary btn-sm ms-3 px-3">-->
-                <!--                        <span class="text-light m-auto">Danh sách dịch vụ đi kèm</span>-->
-                <!--                    </button>-->
-                <!--                </a>-->
 
                 <button class="btn btn-primary btn-outline-secondary btn-sm ms-3 px-3"
                         th:attr="onclick=|showAttachDetail('${contractNew.getId()}')|" data-bs-toggle="modal"
                         data-bs-target="#showAttachDetail">
-                    <span class="text-light m-auto">Danh sách dịch vụ đi kèm</span>
+                    <span class="text-light m-auto">List Attach Facilitites </span>
                 </button>
             </td>
         </tr>
@@ -122,7 +119,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="form-group">
-                            <label class="h6" for="facility">Tên dịch vụ:</label>
+                            <label class="h6" for="facility">Name Facility:</label>
                             <div class="input-group">
                                 <select id="facility" class="form-select" th:field="*{facility}">
                                     <option value="0"></option>
@@ -135,7 +132,7 @@
                         </div>
 
                         <div class="mt-3 form-group">
-                            <label class="h6" for="employee">Tên nhân viên:</label>
+                            <label class="h6" for="employee">Name Employee:</label>
                             <div class="input-group">
                                 <select id="employee" class="form-control" th:field="*{employee}">
                                     <option value="0"></option>
@@ -148,7 +145,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="h6" for="customer">Tên khách hàng:</label>
+                            <label class="h6" for="customer">Name Customer:</label>
                             <div class="input-group">
                                 <select id="customer" class="form-control" th:field="*{customer}">
                                     <option value="0"></option>
@@ -160,7 +157,7 @@
                         </div>
 
                         <div class="mt-3 form-group">
-                            <label for="startDate" class="h6">Ngày bắt đầu:</label>
+                            <label for="startDate" class="h6">Day Start:</label>
                             <input type="date" id="startDate" class="form-control" th:field="*{startDate}">
 <!--                                   th:min="${minAge}" onchange="changeEndDate(this)" required-->
 <!--                                   pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[0-1])$"-->
@@ -168,14 +165,14 @@
                         </div>
 
                         <div class="mt-3 form-group" id="endDateForm" >
-                            <label for="endDate" class="h6">Ngày kết thúc:</label>
+                            <label for="endDate" class="h6">End Day:</label>
                             <input type="date" id="endDate" class="form-control" th:field="*{endDate}" required
                                    pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[0-1])$"
                                    title="Vui lòng chọn ngày kết thúc."/>
                         </div>
 
                         <div class="mt-3 form-group">
-                            <label for="deposit" class="h6">Tiền đặt cọc (VNĐ):</label>
+                            <label for="deposit" class="h6">Deposit(VNĐ):</label>
                             <div class="input-group">
                                 <input type="number" id="deposit" class="form-control"
                                        placeholder="Nhập tiền đặt cọc..." th:field="*{deposit}" required
@@ -213,7 +210,7 @@
                                readonly/>
 
                         <div class="form-group">
-                            <label class="h6" for="attachFacility">Tên dịch vụ đi kèm:</label>
+                            <label class="h6" for="attachFacility">Name Attach Facility:</label>
                             <div class="input-group">
                                 <select id="attachFacility" class="form-select"
                                         th:field="*{attachFacility.id}">
@@ -225,7 +222,7 @@
                         </div>
 
                         <div class="mt-3 form-group">
-                            <label for="quantity" class="h6">Số lượng:</label>
+                            <label for="quantity" class="h6">Amounts:</label>
                             <div class="input-group">
                                 <input type="number" id="quantity" class="form-control"
                                        placeholder="Nhập số lượng..." th:field="*{quantity}" required
@@ -250,7 +247,7 @@
     <div class="modal-dialog">
         <div class="modal-content modalCSS">
             <div class="modal-header">
-                <h4 class="modal-title text-center" id="exampleModalLabel2">DANH SÁCH DỊCH VỤ ĐI KÈM</h4>
+                <h4 class="modal-title text-center" id="exampleModalLabel2">LIST ATTACH FACILITIES</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -258,7 +255,7 @@
                 <table id="showAttach"></table>
 
                 <div class="h5 text-danger text-center" id="note">
-                    Chưa có dịch vụ đi kèm trong hợp đồng!
+                    NOT HAVE ANY THINGS!
                 </div>
             </div>
 
@@ -303,9 +300,9 @@
                     let tr = [];
 
                     tr.push("<tr>");
-                    tr.push("<th>" + "Tên dịch vụ đi kèm" + "</th>");
-                    tr.push("<th class='px-5'>" + "Đơn vị" + "</th>");
-                    tr.push("<th class='text-center'>" + "Số lượng" + "</th>");
+                    tr.push("<th>" + "ATTACH FACILITY" + "</th>");
+                    tr.push("<th class='px-5'>" + "Units" + "</th>");
+                    tr.push("<th class='text-center'>" + "Amounts" + "</th>");
                     tr.push("</tr>");
 
                     for (let i = 0; i < data.length; i++) {

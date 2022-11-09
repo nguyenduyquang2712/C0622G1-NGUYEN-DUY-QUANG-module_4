@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ContractRepository extends JpaRepository<Contract, Integer> {
     @Query(value = "SELECT  f.`name` AS facilityName,\n" +
             "             c.`name` AS customerName,\n" +
+            "             e.`name` AS employeeName,\n" +
             "       ct.id AS id,\n" +
             "                 ct.start_date AS startDate,\n" +
             "                   ct.end_date AS endDate,\n" +
@@ -29,6 +30,8 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
             "                   attach_facility af ON cd.attach_facility_id = af.id\n" +
             "                        LEFT JOIN\n" +
             "                customer c ON ct.customer_id = c.id\n" +
+            "                        LEFT JOIN\n" +
+            "                employee e ON ct.employee_id = e.id\n" +
             "                GROUP BY ct.id",
             nativeQuery = true,countQuery = "select count(*) from contract")
     Page<IContractDto> showListConTract(Pageable pageable);

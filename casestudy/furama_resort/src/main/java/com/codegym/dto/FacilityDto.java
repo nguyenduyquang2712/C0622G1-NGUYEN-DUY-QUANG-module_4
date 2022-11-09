@@ -4,19 +4,30 @@ import com.codegym.model.contract.Contract;
 import com.codegym.model.facility.FacilityType;
 import com.codegym.model.facility.RentType;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 public class FacilityDto {
     private int id;
-    @NotEmpty
+    @NotBlank(message = "Tên dịch vụ không được để trống.")
+    @Pattern(regexp = "^(([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}( \\d*)?)| *$",
+            message = "Tên dịch vụ được phép chứa số, và các kí tự đầu tiên của mỗi từ phải viết hoa.")
     private String name;
+    @NotBlank(message = "Diện tích sử dụng không được để trống.")
+    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Diện tích sử dụng phải là số nguyên dương.")
     private int area;
+    @NotBlank(message = "Chi phí thuê không được để trống.")
+    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Chi phí thuê (VNĐ) phải là số nguyên dương.")
     private double cost;
+    @NotBlank(message = "Số người tối đa không được để trống.")
+    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Số người tối đa phải là số nguyên dương.")
     private int maxPeople;
-    @NotEmpty
     private String standardRoom;
     private String descriptionOtherConvenience;
+    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Diện tích hồ bơi phải là số nguyên dương.")
     private double poolArea;
+    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Số tầng phải là số nguyên dương.")
     private int numberOfFloors;
     private String facilityFree;
     private int status = 1;
