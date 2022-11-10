@@ -7,10 +7,10 @@ import java.util.Set;
 public class AttachFacility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
-    private double cost;
+    private Double cost;
     private String unit;
     private String serviceStatus;
     @Column(columnDefinition = "int default 1")
@@ -22,7 +22,7 @@ public class AttachFacility {
     public AttachFacility() {
     }
 
-    public AttachFacility(int id, String name, double cost, String unit, String serviceStatus, int status, Set<ContractDetail> contractDetails) {
+    public AttachFacility(Integer id, String name, Double cost, String unit, String serviceStatus, int status, Set<ContractDetail> contractDetails) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -32,11 +32,11 @@ public class AttachFacility {
         this.contractDetails = contractDetails;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -48,11 +48,11 @@ public class AttachFacility {
         this.name = name;
     }
 
-    public double getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 
@@ -72,7 +72,7 @@ public class AttachFacility {
         this.serviceStatus = serviceStatus;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 

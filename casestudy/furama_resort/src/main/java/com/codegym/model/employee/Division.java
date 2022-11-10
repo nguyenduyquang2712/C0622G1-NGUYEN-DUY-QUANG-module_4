@@ -8,7 +8,7 @@ public class Division {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @Column(columnDefinition = "int default 1")
     private int status = 1;
@@ -19,18 +19,18 @@ public class Division {
     public Division() {
     }
 
-    public Division(int id, String name, int status, Set<Employee> employees) {
+    public Division(Integer id, String name, int status, Set<Employee> employees) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.employees = employees;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

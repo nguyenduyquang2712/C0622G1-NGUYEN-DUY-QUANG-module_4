@@ -7,7 +7,7 @@ import java.util.Set;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int roleId;
+    private Integer roleId;
     private String roleName;
     @Column(columnDefinition = "int default 1")
     private int status = 1;
@@ -18,18 +18,18 @@ public class Role {
     public Role() {
     }
 
-    public Role(int roleId, String roleName, int status, Set<User> users) {
+    public Role(Integer roleId, String roleName, int status, Set<User> users) {
         this.roleId = roleId;
         this.roleName = roleName;
         this.status = status;
         this.users = users;
     }
 
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 

@@ -3,32 +3,30 @@ package com.codegym.dto;
 import com.codegym.model.contract.Contract;
 import com.codegym.model.facility.FacilityType;
 import com.codegym.model.facility.RentType;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 public class FacilityDto {
-    private int id;
+    private Integer id;
     @NotBlank(message = "Tên dịch vụ không được để trống.")
     @Pattern(regexp = "^(([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}( \\d*)?)| *$",
             message = "Tên dịch vụ được phép chứa số, và các kí tự đầu tiên của mỗi từ phải viết hoa.")
     private String name;
     @NotBlank(message = "Diện tích sử dụng không được để trống.")
     @Pattern(regexp = "^[1-9]\\d*| *$", message = "Diện tích sử dụng phải là số nguyên dương.")
-    private int area;
+    private String area;
     @NotBlank(message = "Chi phí thuê không được để trống.")
     @Pattern(regexp = "^[1-9]\\d*| *$", message = "Chi phí thuê (VNĐ) phải là số nguyên dương.")
-    private double cost;
+    private String cost;
     @NotBlank(message = "Số người tối đa không được để trống.")
     @Pattern(regexp = "^[1-9]\\d*| *$", message = "Số người tối đa phải là số nguyên dương.")
-    private int maxPeople;
+    private String maxPeople;
     private String standardRoom;
     private String descriptionOtherConvenience;
     @Pattern(regexp = "^[1-9]\\d*| *$", message = "Diện tích hồ bơi phải là số nguyên dương.")
-    private double poolArea;
+    private String poolArea;
     @Pattern(regexp = "^[1-9]\\d*| *$", message = "Số tầng phải là số nguyên dương.")
-    private int numberOfFloors;
+    private String numberOfFloors;
     private String facilityFree;
     private int status = 1;
     private RentType rentType;
@@ -38,7 +36,7 @@ public class FacilityDto {
     public FacilityDto() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -54,27 +52,27 @@ public class FacilityDto {
         this.name = name;
     }
 
-    public int getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
-    public double getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
-    public int getMaxPeople() {
+    public String getMaxPeople() {
         return maxPeople;
     }
 
-    public void setMaxPeople(int maxPeople) {
+    public void setMaxPeople(String maxPeople) {
         this.maxPeople = maxPeople;
     }
 
@@ -94,19 +92,19 @@ public class FacilityDto {
         this.descriptionOtherConvenience = descriptionOtherConvenience;
     }
 
-    public double getPoolArea() {
+    public String getPoolArea() {
         return poolArea;
     }
 
-    public void setPoolArea(double poolArea) {
+    public void setPoolArea(String poolArea) {
         this.poolArea = poolArea;
     }
 
-    public int getNumberOfFloors() {
+    public String getNumberOfFloors() {
         return numberOfFloors;
     }
 
-    public void setNumberOfFloors(int numberOfFloors) {
+    public void setNumberOfFloors(String numberOfFloors) {
         this.numberOfFloors = numberOfFloors;
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/contracts/v1")
 @CrossOrigin("*")
-public class ContractDetailController {
+public class ContractDetailRestController {
     @Autowired
     private IContractDetailService iContractDetailService;
 

@@ -10,10 +10,10 @@ import java.util.Set;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
-    private java.sql.Date dateOfBirth;
-    private int gender;
+    private String dateOfBirth;
+    private Integer gender;
     private String idCard;
     private String phoneNumber;
     private String email;
@@ -32,7 +32,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int id, String name, java.sql.Date dateOfBirth, int gender, String idCard, String phoneNumber, String email, String address, int status, CustomerType customerType, Set<Contract> contracts) {
+    public Customer(Integer id, String name, String dateOfBirth, Integer gender, String idCard, String phoneNumber, String email, String address, int status, CustomerType customerType, Set<Contract> contracts) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -46,7 +46,7 @@ public class Customer {
         this.contracts = contracts;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -62,15 +62,15 @@ public class Customer {
         this.name = name;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(java.sql.Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 

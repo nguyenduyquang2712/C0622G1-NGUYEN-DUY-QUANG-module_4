@@ -62,7 +62,7 @@ public class FacilityController {
             bindingResult.getErrorCount();
             modelAndView.addObject("facilityTypeId", facilityDto.getFacilityType().getId());
             modelAndView.addObject("facilityDto", facilityDto);
-            bindingResult.getErrorCount();
+            return modelAndView;
         }
         ModelAndView modelAndView = new ModelAndView("facility/create");
         modelAndView.addObject("facilityTypeId", facilityDto.getFacilityType().getId());

@@ -10,6 +10,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface FacilityRepository extends JpaRepository<Facility,Integer> {
     @Query(value = "select f.* from `facility` f join `facility_type` ft " +
@@ -18,6 +20,8 @@ public interface FacilityRepository extends JpaRepository<Facility,Integer> {
     Page<Facility> findAllByNameAndType(@Param("name") String nameSearch,
                                         @Param("type")  String facilityType,
                                         Pageable pageable);
+    @Query(value = "select f.* from `facility` f where f.`status` = 1 ", nativeQuery = true)
+    List<Facility> findAll();
 
     @Transactional
     @Modifying

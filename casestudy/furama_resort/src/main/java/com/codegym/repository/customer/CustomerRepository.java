@@ -26,6 +26,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
                                                      Pageable pageable);
     @Query(value="select * from `customer` where `status`=1", nativeQuery = true)
     Page<Customer>  findAll(Pageable pageable);
+    @Query(value="select c.* from `customer`c where c.`status`=1", nativeQuery = true)
+    List<Customer> findAll();
     @Transactional
     @Modifying
     @Query(value = "update customer set `status` = 0 where id = :id", nativeQuery = true)

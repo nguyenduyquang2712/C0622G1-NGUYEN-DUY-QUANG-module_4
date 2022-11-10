@@ -5,17 +5,16 @@ import com.codegym.model.employee.Employee;
 import com.codegym.model.facility.Facility;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Set;
 
 @Entity
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private java.sql.Date startDate;
-    private java.sql.Date endDate;
-    private double deposit;
+    private Integer id;
+    private String startDate;
+    private String endDate;
+    private String deposit;
     @Column(columnDefinition = "int default 1")
     private int status = 1;
 
@@ -37,7 +36,7 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(int id, java.sql.Date startDate, java.sql.Date endDate, double deposit, int status, Set<ContractDetail> contractDetails, Employee employee, Customer customer, Facility facility) {
+    public Contract(Integer id, String startDate, String endDate, String deposit, int status, Set<ContractDetail> contractDetails, Employee employee, Customer customer, Facility facility) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -49,35 +48,35 @@ public class Contract {
         this.facility = facility;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(java.sql.Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(java.sql.Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public double getDeposit() {
+    public String getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(double deposit) {
+    public void setDeposit(String deposit) {
         this.deposit = deposit;
     }
 

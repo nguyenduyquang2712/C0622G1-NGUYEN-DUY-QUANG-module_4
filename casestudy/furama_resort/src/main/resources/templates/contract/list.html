@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 </head>
 <body>
-
+<div th:replace="~{/home::header}"></div>
 <div class="p-3">
     <h2 >DANH SÁCH HỢP ĐỒNG</h2>
 
@@ -106,14 +106,14 @@
 </div>
 
 
-<div class="modal fade" id="addContract" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+<div class="modal hide fade in" data-bs-keyboard="false" data-bs-backdrop="static" id="addContract" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="border border-2 border-success p-3 rounded formCSS" th:action="@{/contracts/add}"
-                  th:object="${contract}" method="POST">
+                  th:object="${contractDto}" method="POST">
                 <div class="modal-header">
                     <h3 class="modal-title fw-bold text-primary" id="exampleModalLabel3">THÊM MỚI HỢP ĐỒNG</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button id="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
@@ -122,12 +122,13 @@
                             <label class="h6" for="facility">Name Facility:</label>
                             <div class="input-group">
                                 <select id="facility" class="form-select" th:field="*{facility}">
-                                    <option value="0"></option>
+                                    <option value=""></option>
                                     <option th:each="item : ${facilityList}" th:value="${item.id}"
                                             th:text="${item.name}"
                                             ></option>
                                 </select>
-                                <span class="input-group-text"><i class="fa-solid fa-file-signature"></i></span>
+                                <p style="color: red" th:errors="*{facility}" th:if="${#fields.hasErrors('facility')}"></p>
+                                <input hidden id="checkFacilty" type="text" th:if="${#fields.hasErrors('facility')}" value="facility">
                             </div>
                         </div>
 
@@ -140,7 +141,9 @@
                                             th:text="${item.name}" >
                                     </option>
                                 </select>
-                                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+                                <span  style="color: red" th:errors="*{employee}" th:if="${#fields.hasErrors('employee')}"></span>
+                                <input hidden id="checkEmployee" type="text" th:if="${#fields.hasErrors('employee')}" value="employee">
+<!--                                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>-->
                             </div>
                         </div>
 
@@ -152,13 +155,17 @@
                                     <option th:each="item : ${customerList}" th:value="${item.id}"
                                             th:text="${item.name}"></option>
                                 </select>
-                                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+                                <span  style="color: red" th:errors="*{customer}" th:if="${#fields.hasErrors('customer')}"></span>
+                                <input hidden id="checkCustomer" type="text" th:if="${#fields.hasErrors('customer')}" value="customer">
+<!--                                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>-->
                             </div>
                         </div>
 
                         <div class="mt-3 form-group">
                             <label for="startDate" class="h6">Day Start:</label>
                             <input type="date" id="startDate" class="form-control" th:field="*{startDate}">
+                            <span  style="color: red" th:errors="*{startDate}" th:if="${#fields.hasErrors('startDate')}"></span>
+                            <input hidden id="checkStartDay" type="text" th:if="${#fields.hasErrors('startDate')}" value="startday">
 <!--                                   th:min="${minAge}" onchange="changeEndDate(this)" required-->
 <!--                                   pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[0-1])$"-->
 <!--                                   title="Vui lòng chọn ngày bắt đầu."/>-->
@@ -166,25 +173,29 @@
 
                         <div class="mt-3 form-group" id="endDateForm" >
                             <label for="endDate" class="h6">End Day:</label>
-                            <input type="date" id="endDate" class="form-control" th:field="*{endDate}" required
-                                   pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[0-1])$"
-                                   title="Vui lòng chọn ngày kết thúc."/>
+                            <input type="date" id="endDate" class="form-control" th:field="*{endDate}">
+                            <span style="color: red" th:errors="*{endDate}" th:if="${#fields.hasErrors('endDate')}"></span>
+                            <input hidden id="checkEndDay" type="text" th:if="${#fields.hasErrors('endDate')}" value="endday">
+<!--                                   pattern="^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[0-1])$"-->
+<!--                                   title="Vui lòng chọn ngày kết thúc."/>-->
                         </div>
 
                         <div class="mt-3 form-group">
                             <label for="deposit" class="h6">Deposit(VNĐ):</label>
                             <div class="input-group">
                                 <input type="number" id="deposit" class="form-control"
-                                       placeholder="Nhập tiền đặt cọc..." th:field="*{deposit}" required
-                                       pattern="^0|[1-9]\d*$"
-                                       title="Tiền đặt cọc (VNĐ) phải là số nguyên lớn hơn hoặc bằng 0."/>
-                                <span class="input-group-text"><i class="fa-solid fa-money-bill-wave"></i></span>
+                                       placeholder="Nhập tiền đặt cọc..." th:field="*{deposit}">
+                                <span style="color: red" th:errors="*{deposit}" th:if="${#fields.hasErrors('deposit')}"></span>
+                                <input hidden id="checkDeposit" type="text" th:if="${#fields.hasErrors('deposit')}" value="deposit">
+<!--                                       pattern="^0|[1-9]\d*$"-->
+<!--                                       title="Tiền đặt cọc (VNĐ) phải là số nguyên lớn hơn hoặc bằng 0."/>-->
                             </div>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>-->
+                        <a class="btn btn-primary" href="/contracts"> Đóng</a>
                         <button type="submit" class="btn btn-success" value="delete">Lưu</button>
                     </div>
                 </div>
@@ -198,22 +209,22 @@
         <div class="modal-content">
             <form class="border border-2 border-success p-3 rounded formCSS"
                   th:action="@{/contracts/add-contract-detail}"
-                  th:object="${contractDetail}" method="POST">
+                  th:object="${contractDetailDto}" method="POST">
                 <div class="modal-header">
                     <h3 class="modal-title fw-bold text-primary" id="exampleModalLabel4">THÊM DỊCH VỤ ĐI KÈM</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button id="closeModal2" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="hidden" name="contractId" id="contractId" th:field="*{contract.id}"
+                        <input type="hidden" name="contractId" id="contractId" th:field="*{contract}"
                                readonly/>
 
                         <div class="form-group">
                             <label class="h6" for="attachFacility">Name Attach Facility:</label>
                             <div class="input-group">
                                 <select id="attachFacility" class="form-select"
-                                        th:field="*{attachFacility.id}">
+                                        th:field="*{attachFacility}">
                                     <option th:each="item : ${attachFacilityList}" th:value="${item.id}"
                                             th:text="${item.name + ' (₫ ' + item.cost + ')'}"></option>
                                 </select>
@@ -225,16 +236,18 @@
                             <label for="quantity" class="h6">Amounts:</label>
                             <div class="input-group">
                                 <input type="number" id="quantity" class="form-control"
-                                       placeholder="Nhập số lượng..." th:field="*{quantity}" required
-                                       pattern="^[1-9]\d*$"
-                                       title="Số lượng phải là số nguyên dương."/>
-                                <span class="input-group-text">#</span>
+                                       placeholder="Nhập số lượng..." th:field="*{quantity}" >
+                                <span style="color: red" th:errors="*{quantity}" th:if="${#fields.hasErrors('quantity')}"></span>
+                                <input hidden id=checkQuantity type="text" th:if="${#fields.hasErrors('quantity')}" value="quantity">
+<!--                                       pattern="^[1-9]\d*$"-->
+<!--                                       title="Số lượng phải là số nguyên dương."/>-->
+
                             </div>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <a class="btn btn-primary" href="/contracts"> Đóng</a>
                         <button type="submit" class="btn btn-success" value="delete">Lưu</button>
                     </div>
                 </div>
@@ -272,16 +285,43 @@
         crossorigin="anonymous">
 </script>
 <script>
-    // $(window).load(function(){
-    //     let number =0;
-    //     if(number==0) {
-    //         $('#addContract').modal('show');
-    //     }
-    // });
-    function changeEndDate(startDate) {
-        document.getElementById("endDate").min = startDate.value;
-        document.getElementById("endDateForm").style.display = "block";
-    }
+    // $("#addContract").removeClass("in");
+    // $(".modal-backdrop").remove();
+    // $("#myModal").hide();
+
+    // $('#addContract').click(function(){
+    //     $('#addContract').modal({backdrop: 'static', keyboard: false})
+    //     $('#addContract').modal('show');
+    // })
+    $(document).ready(function(){
+        $('#addContract').modal({backdrop: 'static', keyboard: false})
+        $('#addContractdetail').modal({backdrop: 'static', keyboard: false})
+        let checkStartDay = $('#checkStartDay').val();
+        let checkEndDay = $('#checkEndDay').val();
+        let checkFacilty = $('#checkFacilty').val();
+        let chechEmployee = $('#chechEmployee').val();
+        let checkCustomer = $('#checkCustomer').val();
+        let checkDeposit = $('#checkDeposit').val();
+        let checkQuantity = $('#checkQuantity').val();
+        if(checkStartDay === "startday" || checkEndDay === "endday"|| checkFacilty==="facility"||chechEmployee==="employee"||checkCustomer==="customer"||checkDeposit==="deposit") {
+            $('#addContract').modal('show');
+        }
+        if(checkQuantity==="quantity"){
+            $('#addContractdetail').modal('show');
+        }
+
+
+    });
+    $('#closeModal').click(function(){
+        window.location.href='http://localhost:8080/contracts'
+    })
+    $('#closeModal2').click(function(){
+        window.location.href='http://localhost:8080/contracts'
+    })
+    // function changeEndDate(startDate) {
+    //     document.getElementById("endDate").min = startDate.value;
+    //     document.getElementById("endDateForm").style.display = "block";
+    // }
 
     function addContractdetail(id) {
         document.getElementById("contractId").value = id;

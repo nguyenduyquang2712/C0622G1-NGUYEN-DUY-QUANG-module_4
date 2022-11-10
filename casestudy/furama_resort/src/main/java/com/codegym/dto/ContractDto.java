@@ -5,52 +5,62 @@ import com.codegym.model.customer.Customer;
 import com.codegym.model.employee.Employee;
 import com.codegym.model.facility.Facility;
 
-import java.sql.Date;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
 import java.util.Set;
 
 public class ContractDto {
-    private int id;
-    private java.sql.Date startDate;
-    private java.sql.Date endDate;
-    private double deposit;
+    private Integer id;
+    @NotBlank(message = "Không được trống")
+    private String startDate;
+    @NotBlank(message = "Không được trống")
+    private String endDate;
+    @NotBlank(message = "Không được để trống")
+    @PositiveOrZero(message = "Tiền đặt cọc là số không âm")
+    private String deposit;
     private int status = 1;
     private Set<ContractDetail> contractDetails;
+    @NotNull(message = "Vui lòng chọn")
     private Employee employee;
+    @NotNull(message = "Vui lòng chọn")
     private Customer customer;
+    @NotNull(message = "Vui lòng chọn")
     private Facility facility;
 
     public ContractDto() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public double getDeposit() {
+    public String getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(double deposit) {
+    public void setDeposit(String deposit) {
         this.deposit = deposit;
     }
 

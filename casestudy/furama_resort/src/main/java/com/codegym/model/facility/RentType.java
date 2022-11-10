@@ -7,7 +7,7 @@ import java.util.Set;
 public class RentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @Column(columnDefinition = "int default 1")
     private int status = 1;
@@ -18,18 +18,18 @@ public class RentType {
     public RentType() {
     }
 
-    public RentType(int id, String name, int status, Set<Facility> facilities) {
+    public RentType(Integer id, String name, int status, Set<Facility> facilities) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.facilities = facilities;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

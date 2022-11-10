@@ -11,11 +11,12 @@ import java.util.Set;
 
 public class CustomerDto {
     private int id;
-    @NotBlank(message = "must not be blank")
+    @NotBlank(message = "Name không được để trống")
     @Pattern(regexp = "^(([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5})| *$",
             message = "Tên khách hàng không được chứa số, và các kí tự đầu tiên của mỗi từ phải viết hoa.")
     private String name;
-    private java.sql.Date dateOfBirth;
+    @NotBlank(message="Không được để trống")
+    private String dateOfBirth;
     private int gender;
     @NotBlank(message = "Số CMND/CCCD không được để trống.")
     @Pattern(regexp = "^(\\d{9}|\\d{12})| *$",
@@ -28,6 +29,7 @@ public class CustomerDto {
     @NotBlank(message = "Email không được để trống.")
     @Email(message = "Địa chỉ email phải đúng định dạng.")
     private String email;
+    @NotBlank(message = "Địa chỉ không được để trống.")
     private String address;
     private Integer status = 1;
     private CustomerType customerType;
@@ -67,11 +69,11 @@ public class CustomerDto {
         this.name = name;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

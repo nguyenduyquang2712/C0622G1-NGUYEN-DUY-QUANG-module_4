@@ -1,6 +1,7 @@
 package com.codegym.model.employee;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Set;
 
 @Entity
@@ -8,7 +9,7 @@ public class EducationDegree {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @Column(columnDefinition = "int default 1")
     private int status = 1;
@@ -19,18 +20,18 @@ public class EducationDegree {
     public EducationDegree() {
     }
 
-    public EducationDegree(int id, String name, int status, Set<Employee> employees) {
+    public EducationDegree(Integer id, String name, int status, Set<Employee> employees) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.employees = employees;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

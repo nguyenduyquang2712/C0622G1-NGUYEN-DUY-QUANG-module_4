@@ -10,11 +10,10 @@
             crossorigin="anonymous"></script>
 </head>
 <body style=" background-image: url(https://img.wallpapersafari.com/desktop/1600/900/22/47/iU4Gez.jpg);">
-<header style="text-align: center;margin: 5px">
+<div th:replace="~{/home::header}"></div>
+<div style="text-align: center;margin: 5px">
     <h1>List Facility</h1>
-    <div><a href="/home">
-        <button type="button" class="btn btn-info">Home</button>
-    </a></div>
+
     <a href="/facilities/create">
         <button style="margin: 10px" type="button" class="btn btn-info">Add New Facility</button>
     </a>
@@ -27,7 +26,7 @@
         </select>
         <input type="submit" value="Search">
     </form>
-</header>
+</div>
 <th:block th:if="${message}">
     <h2 th:text="${message}"></h2>
 </th:block>
@@ -86,6 +85,7 @@
     <a class="btn btn-primary" th:href="@{'/facilities'(page=${facilities.number + 1},nameSearch=${nameSearch},facilityType=${facilityType})}"
        th:if="${facilities.hasNext()}">Next</a>
 </div>
+<footer th:replace="~{/home::footer}"></footer>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">

@@ -35,7 +35,6 @@ List<CustomerType> getCustomerTypes(){
 
     @GetMapping("/create")
     public ModelAndView creatCustomer() {
-        List<CustomerType> customerTypeList = customerTypeService.findAll();
         ModelAndView modelAndView = new ModelAndView("customer/create");
         modelAndView.addObject("customerDto", new CustomerDto());
         return modelAndView;

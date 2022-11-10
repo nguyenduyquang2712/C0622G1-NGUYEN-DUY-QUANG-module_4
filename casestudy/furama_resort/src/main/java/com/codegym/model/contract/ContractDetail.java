@@ -6,8 +6,8 @@ import javax.persistence.*;
 public class ContractDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private int quantity;
+    private Integer id;
+    private Integer quantity;
     @Column(columnDefinition = "int default 1")
     private int status = 1;
 
@@ -22,7 +22,7 @@ public class ContractDetail {
     public ContractDetail() {
     }
 
-    public ContractDetail(int id, int quantity, int status, AttachFacility attachFacility, Contract contract) {
+    public ContractDetail(Integer id, Integer quantity, int status, AttachFacility attachFacility, Contract contract) {
         this.id = id;
         this.quantity = quantity;
         this.status = status;
@@ -30,7 +30,7 @@ public class ContractDetail {
         this.contract = contract;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -38,15 +38,15 @@ public class ContractDetail {
         this.id = id;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 

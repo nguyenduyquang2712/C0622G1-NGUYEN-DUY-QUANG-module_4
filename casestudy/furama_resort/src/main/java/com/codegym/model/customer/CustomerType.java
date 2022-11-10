@@ -7,7 +7,7 @@ import java.util.Set;
 public class CustomerType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @Column(columnDefinition = "int default 1")
     private int status = 1;
@@ -18,14 +18,14 @@ public class CustomerType {
     public CustomerType() {
     }
 
-    public CustomerType(int id, String name, int status, Set<Customer> customers) {
+    public CustomerType(Integer id, String name, int status, Set<Customer> customers) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.customers = customers;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class CustomerType {
         this.name = name;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
