@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class ContractDetailDto {
+    private Integer id;
     @NotNull(message = "Không để trống")
     @Min(1)
     private Integer quantity;
@@ -34,13 +35,13 @@ public class ContractDetailDto {
         this.contract = contract;
     }
 
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getQuantity() {
         return quantity;

@@ -12,7 +12,7 @@ public class Role {
     @Column(columnDefinition = "int default 1")
     private int status = 1;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "roles")
     private Set<User> users;
 
     public Role() {

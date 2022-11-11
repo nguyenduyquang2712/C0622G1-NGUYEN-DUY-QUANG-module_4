@@ -84,6 +84,29 @@
     </table>
 </form>
 <script>
+    $(document).ready(function () {
+        idFacilityType();
+
+    })
+
+    function idFacilityType() {
+        let idFacilityType = $('#facilityType').val();
+        if (idFacilityType === '1') {
+            $('#facilityFree').hide();
+            $('#poolArea').show();
+            $('#numberFloors').show();
+        }
+        if (idFacilityType === '2') {
+            $('#facilityFree').hide();
+            $('#poolArea').hide();
+            $('#numberFloors').show();
+        }
+        if (idFacilityType === '3') {
+            $('#poolArea').hide();
+            $('#numberFloors').hide();
+            $('#facilityFree').show();
+        }
+    }
     $('#facilityFree').hide();
     $('#poolArea').show();
     $('#numberFloors').show();

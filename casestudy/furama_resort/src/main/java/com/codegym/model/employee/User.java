@@ -12,7 +12,7 @@ public class User {
     @Column(columnDefinition = "int default 1")
     private int status = 1;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "username"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

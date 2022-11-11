@@ -47,7 +47,10 @@ public class ContractController {
         modelAndView.addObject("contractDetailDto",new ContractDetailDto());
         return modelAndView;
     }
-
+    @GetMapping("/add")
+    public String getBackList(){
+        return "redirect:/contracts";
+    }
     @PostMapping("/add")
     public String saveContract(Model model,@ModelAttribute @Validated ContractDto contractDto, BindingResult bindingResult,@PageableDefault(value = 3) Pageable pageable,RedirectAttributes redirectAttributes) {
        if(bindingResult.hasFieldErrors()){
@@ -67,7 +70,10 @@ public class ContractController {
         redirectAttributes.addFlashAttribute("message", "Thêm mới hợp đồng thành công!");
         return "redirect:/contracts";
     }
-
+    @GetMapping("/add-contract-detail")
+    public String returnList(){
+        return "redirect:/contracts";
+    }
     @PostMapping("/add-contract-detail")
     public String saveDetail(@ModelAttribute @Validated ContractDetailDto contractDetailDto,BindingResult bindingResult,@PageableDefault(value = 3) Pageable pageable,Model model, RedirectAttributes redirectAttributes) {
         if(bindingResult.hasFieldErrors()){
@@ -81,6 +87,7 @@ public class ContractController {
             model.addAttribute("contractDto", new ContractDto());
             return "contract/list";
         }
+
         ContractDetail contractDetail = new ContractDetail();
         BeanUtils.copyProperties(contractDetailDto,contractDetail);
         contractDetailService.save(contractDetail);
