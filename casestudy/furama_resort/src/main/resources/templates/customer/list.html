@@ -74,15 +74,28 @@
     </th:block>
     </tbody>
 </table>
-
-<div>
-    <a class="btn btn-primary" th:href="@{'/customers'(page=${customers.number - 1},nameSearch=${nameSearch},email=${email},customerType=${customerType})}"
-       th:if="${customers.hasPrevious()}">Previous</a>
-    <span style="color: gold; font-weight: bold" th:text="${customers.number+1}"></span><span style="color: gold; font-weight: bold" >/</span>
-    <span style="color: gold; font-weight: bold" th:text="${customers.totalPages}"></span>
-    <a class="btn btn-primary"  th:href="@{'/customers'(page=${customers.number + 1},nameSearch=${nameSearch},email=${email},customerType=${customerType})}"
-       th:if="${customers.hasNext()}">Next</a>
+<div style="text-align: center">
+    <a th:href="@{'/customers'(page=${customers.number - 1},nameSearch=${nameSearch},email=${email},customerType=${customerType})}"
+       th:if="${customers.hasPrevious()}">
+        <button type="button" class="btn btn-secondary">Previous</button>
+    </a>
+    <span th:text="${customers.number+1}"></span> / <span th:text="${customers.totalPages}"></span>
+    <a th:href="@{'/customers'(page=${customers.number + 1},nameSearch=${nameSearch},email=${email},customerType=${customerType})}"
+       th:if="${customers.hasNext()}">
+        <button type="button" class="btn btn-secondary">Next</button>
+    </a>
+    <th:block th:if="${message}">
+        <p style="text-align: center" th:text="${message}"></p>
+    </th:block>
 </div>
+<!--<div>-->
+<!--    <a class="btn btn-primary" th:href="@{'/customers'(page=${customers.number - 1},nameSearch=${nameSearch},email=${email},customerType=${customerType})}"-->
+<!--       th:if="${customers.hasPrevious()}">Previous</a>-->
+<!--    <span style="color: gold; font-weight: bold" th:text="${customers.number+1}"></span><span style="color: gold; font-weight: bold" >/</span>-->
+<!--    <span style="color: gold; font-weight: bold" th:text="${customers.totalPages}"></span>-->
+<!--    <a class="btn btn-primary"  th:href="@{'/customers'(page=${customers.number + 1},nameSearch=${nameSearch},email=${email},customerType=${customerType})}"-->
+<!--       th:if="${customers.hasNext()}">Next</a>-->
+<!--</div>-->
 <footer th:replace="~{/home::footer}"></footer>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
      aria-hidden="true">

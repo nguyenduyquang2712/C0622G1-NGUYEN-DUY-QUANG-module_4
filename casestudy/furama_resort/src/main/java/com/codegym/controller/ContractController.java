@@ -61,7 +61,7 @@ public class ContractController {
            model.addAttribute("employeeList",employeeService.findAll());
            model.addAttribute("customerList",customerService.findAll());
            model.addAttribute("contractDetailDto",new ContractDetailDto());
-           model.addAttribute("contractDto",contractDto);
+//           model.addAttribute("contractDto",contractDto);
            return "contract/list";
        }
        Contract contract = new Contract();

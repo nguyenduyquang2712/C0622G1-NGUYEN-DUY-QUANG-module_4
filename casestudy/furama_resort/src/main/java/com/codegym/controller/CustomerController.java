@@ -60,7 +60,7 @@ List<CustomerType> getCustomerTypes(){
     public ModelAndView showCustomers(@RequestParam(value = "nameSearch", defaultValue = "") String nameSearch,
                                       @RequestParam(value = "email", defaultValue = "") String email,
                                       @RequestParam(value = "customerType", defaultValue = "") String customerType,
-                                      @PageableDefault(value = 3) Pageable pageable) {
+                                      @PageableDefault(value = 1) Pageable pageable) {
         Page<Customer> customers = customerService.findByNameAndEmailAndCustomerType(nameSearch, email, customerType, pageable);
         ModelAndView modelAndView = new ModelAndView("customer/list");
         modelAndView.addObject("customers", customers);
