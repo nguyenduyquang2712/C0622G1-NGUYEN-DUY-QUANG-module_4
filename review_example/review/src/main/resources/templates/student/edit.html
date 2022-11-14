@@ -13,6 +13,7 @@
             <td>Name</td>
             <td>
                 <input type="text" th:field="*{name}"/>
+                <span style="color: red" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
             </td>
         </tr>
         <tr>

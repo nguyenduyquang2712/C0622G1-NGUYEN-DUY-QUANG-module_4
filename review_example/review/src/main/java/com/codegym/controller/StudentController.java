@@ -65,11 +65,14 @@ public class StudentController {
                                 @RequestParam(value = "classRoom",defaultValue = "")String classRoom,
                                 @PageableDefault (value = 2) Pageable pageable, Model model){
         if(bindingResult.hasFieldErrors()){
+            nameSearch = "";
+            classRoom="";
             model.addAttribute("studentList", studentService.findAllByNameAndClassName(nameSearch, classRoom,pageable));
             model.addAttribute("classRoomList", classRoomService.findAll());
             model.addAttribute("courseList", courseService.findAll());
-            model.addAttribute("nameSearch",nameSearch);
-            model.addAttribute("classRoom", classRoom);
+            model.addAttribute("message","error");
+//            model.addAttribute("nameSearch","");
+//            model.addAttribute("classRoom", "");
             return "student/list";
         }
         studentDto.getAccount().setDateCreate(new Date(System.currentTimeMillis()));
@@ -100,7 +103,12 @@ public class StudentController {
         return modelAndView;
     }
     @PostMapping("/edit")
-    public String editStudent(@ModelAttribute StudentDto studentDto, RedirectAttributes redirect){
+    public String editStudent(@ModelAttribute @Validated StudentDto studentDto,BindingResult bindingResult, RedirectAttributes redirect, Model model){
+        if(bindingResult.hasFieldErrors()){
+            model.addAttribute("classRoomList", classRoomService.findAll());
+            model.addAttribute("courseList", courseService.findAll());
+            return "student/edit";
+        }
         Student student = new Student();
         BeanUtils.copyProperties(studentDto,student);
         studentService.save(student);
