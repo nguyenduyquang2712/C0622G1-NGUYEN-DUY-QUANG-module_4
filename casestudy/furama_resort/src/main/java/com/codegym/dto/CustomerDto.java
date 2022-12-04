@@ -30,6 +30,7 @@ public class CustomerDto {
     @Email(message = "Địa chỉ email phải đúng định dạng.")
     private String email;
     @NotBlank(message = "Địa chỉ không được để trống.")
+    @Pattern(regexp = "\\d{2}[-|/]\\d{2}[-|/]\\d{4}")
     private String address;
     private Integer status = 1;
     private CustomerType customerType;

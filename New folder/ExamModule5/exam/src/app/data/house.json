@@ -1,0 +1,210 @@
+{
+  "tickets": [
+    {
+      "id": 1,
+      "price": 1000,
+      "startPoint": "Hue",
+      "endPoint": "Khanh Hoa",
+      "startDate": "01/12/2022",
+      "startTime": "07:00",
+      "carHouse": {
+        "id": 1,
+        "name": "Kim Lien"
+      },
+      "amount": 1
+    },
+    {
+      "id": 2,
+      "price": 5000,
+      "startPoint": "Da Nang",
+      "endPoint": "Khanh Hoa",
+      "startDate": "05/12/2022",
+      "startTime": "08:00",
+      "carHouse": {
+        "id": 2,
+        "name": "Son Tung"
+      },
+      "amount": 2
+    },
+    {
+      "id": 3,
+      "price": 2000,
+      "startPoint": "Thanh Hoa",
+      "endPoint": "Khanh Hoa",
+      "startDate": "08/12/2022",
+      "startTime": "09:00",
+      "carHouse": {
+        "id": 1,
+        "name": "kim Lien"
+      },
+      "amount": 2
+    },
+    {
+      "id": 4,
+      "price": 1000,
+      "startPoint": "Hue",
+      "endPoint": "Da Nang",
+      "startDate": "01/12/2022",
+      "startTime": "07:00",
+      "carHouse": {
+        "id": 2,
+        "name": "Son Tung"
+      },
+      "amount": 1
+    },
+    {
+      "id": 5,
+      "price": 7000,
+      "startPoint": "Hue",
+      "endPoint": "Sai Gon",
+      "startDate": "06/12/2022",
+      "startTime": "07:00",
+      "carHouse": {
+        "id": 3,
+        "name": "Van Trang"
+      },
+      "amount": 4
+    },
+    {
+      "price": 1200,
+      "startPoint": null,
+      "endPoint": "sai gon",
+      "startDate": "2022-12-14",
+      "startTime": "07:00",
+      "amount": 1,
+      "carHouse": {
+        "id": 1,
+        "name": "Kim Lien"
+      },
+      "id": 6
+    },
+    {
+      "price": 2000,
+      "startPoint": "hue",
+      "endPoint": "da",
+      "startDate": "2022-12-22",
+      "startTime": "09:00",
+      "amount": 2,
+      "carHouse": {
+        "id": 1,
+        "name": "Kim Lien"
+      },
+      "id": 7
+    },
+    {
+      "price": 1000,
+      "startPoint": null,
+      "endPoint": "sai gon",
+      "startDate": "2022-12-08",
+      "startTime": "09:00",
+      "amount": 1,
+      "carHouse": "",
+      "id": 8
+    },
+    {
+      "price": 1000,
+      "startPoint": "hue",
+      "endPoint": "sai gon",
+      "startDate": "2022-12-22",
+      "startTime": "09:00",
+      "amount": 2,
+      "carHouse": {
+        "id": 3,
+        "name": "Van Trang"
+      },
+      "id": 9
+    },
+    {
+      "price": 2000,
+      "startPoint": null,
+      "endPoint": "SG",
+      "startDate": "2022-12-15",
+      "startTime": "09:00",
+      "amount": 20,
+      "carHouse": {
+        "id": 1,
+        "name": "Kim Lien"
+      },
+      "id": 10
+    },
+    {
+      "price": 100,
+      "startPoint": "DN",
+      "endPoint": "SG",
+      "startDate": "2022-12-08",
+      "startTime": "09:00",
+      "amount": 12,
+      "carHouse": {
+        "id": 2,
+        "name": "Son Tung"
+      },
+      "id": 11
+    },
+    {
+      "price": 1000,
+      "startPoint": "hue",
+      "endPoint": "sg",
+      "startDate": "2022-12-08",
+      "startTime": "10:00",
+      "amount": 1,
+      "carHouse": {
+        "id": 3,
+        "name": "Van Trang"
+      },
+      "id": 12
+    },
+    {
+      "price": 2000,
+      "startPoint": "DN",
+      "endPoint": "SG",
+      "startDate": "2022-12-01",
+      "startTime": "09:00",
+      "amount": 2,
+      "carHouse": {
+        "id": 2,
+        "name": "Son Tung"
+      },
+      "id": 13
+    },
+    {
+      "price": 2000,
+      "startPoint": "Thanh Hóa",
+      "endPoint": "sai gon",
+      "startDate": "2022-12-08",
+      "startTime": "08:00",
+      "amount": 14,
+      "carHouse": {
+        "id": 2,
+        "name": "Son Tung"
+      },
+      "id": 14
+    },
+    {
+      "price": 1000,
+      "startPoint": "DN",
+      "endPoint": "Hue",
+      "startDate": "2022-12-08",
+      "startTime": "09:00",
+      "amount": 12,
+      "carHouse": {
+        "id": 1,
+        "name": "Kim Lien"
+      },
+      "id": 15
+    }
+  ],
+  "carHouse": [
+    {
+      "id": 1,
+      "name": "Kim Lien"
+    },
+    {
+      "id": 2,
+      "name": "Son Tung"
+    },
+    {
+      "id": 3,
+      "name": "Van Trang"
+    }
+  ]
+}

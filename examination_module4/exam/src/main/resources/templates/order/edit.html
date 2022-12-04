@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Form Edit Customer</h1>
+<p>
+    <a href="/orders/">Back to customer list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/orders/edit}" th:object="${order}" method="post">
+    <table>
+        <input type="hidden" th:field="*{id}">
+        <tr>
+            <td> San pham:</td>
+            <td>
+                <select th:field="*{product}">
+                    <option th:each="item: ${products}" th:value="${item.id}" th:text="${item.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Date Of Order :</td>
+            <td><input type="text" th:field="*{dayOrder}"></td>
+        </tr>
+        <tr>
+            <td>Amount:</td>
+            <td><input type="text" th:field="*{amountOrder}"></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update Customer"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

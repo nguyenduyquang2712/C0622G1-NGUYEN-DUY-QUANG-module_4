@@ -49,7 +49,7 @@ List<CustomerType> getCustomerTypes(){
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
             customerService.save(customer);
-            ModelAndView modelAndView = new ModelAndView("customer/create");
+            ModelAndView modelAndView = new ModelAndView("redirect:/customers");
             modelAndView.addObject("customerDto", customerDto);
             modelAndView.addObject("message", "New customer created successfully");
             return modelAndView;
